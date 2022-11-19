@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.DivideDao">
+    <insert id="saveDivide" parameterType="com.lpy.news.entity.Divide">
+        insert into divide (id,sort,name,create_time,update_time)
+        values (#{id},#{sort},#{name}, #{createTime}, #{updateTime});
+    </insert>
+    <update id="removeDivide" parameterType="com.lpy.news.entity.Divide">
+        update divide
+        set status = 0
+        where id = #{id}
+    </update>
+    <select id="queryDividePage" resultType="com.lpy.news.entity.Divide">
+        select  id,sort,name,create_time,update_time from divide
+        where status= 1
+        order by id  limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="queryDivideCount" resultType="java.lang.Integer">
+        select count(*) from divide
+        where status= 1;
+    </select>
+    <update id="updateDivide" parameterType="com.lpy.news.entity.Divide">
+        update divide
+        set name = #{name},
+            update_time = #{updateTime}
+        where id = #{id}
+    </update>
+    <select id="selectDivideById" resultType="com.lpy.news.entity.Divide">
+        select id,sort,name,create_time,update_time from divide where id = #{id} and status = 1;
+    </select>
+</mapper>

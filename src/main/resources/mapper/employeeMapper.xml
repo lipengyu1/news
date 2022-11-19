@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.EmployeeDao">
+    <select id="selectEmpById" resultType="com.lpy.news.entity.Employee">
+        select * from Employee where id = #{id} and status = 1;
+    </select>
+    <select id="queryEmpPage" resultType="com.lpy.news.dto.EmployeeDto">
+        select id,name,sex,idNumber,phone,email,username,update_time,create_Time from Employee
+        <where>
+            status = 1
+            <if test="name != null and name!= ''" >
+            and name = #{name}
+            </if>
+        </where>
+        order by id  limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="queryEmpCount" resultType="java.lang.Integer">
+        select count(*) from Employee
+        <where>
+            status = 1
+            <if test="name != null and name!= ''" >
+                and name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateEmp" parameterType="com.lpy.news.entity.Employee">
+        update employee
+        set name = #{name},
+            sex = #{sex},
+            idNumber = #{idNumber},
+            phone = #{phone},
+            email = #{email},
+            username = #{username},
+            password = #{password},
+            update_time = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <update id="removeEmp" parameterType="com.lpy.news.entity.Employee">
+        update employee
+        set status = 0
+        where id = #{id}
+    </update>
+
+    <select id="empLogin" resultType="com.lpy.news.entity.Employee">
+        select id,idNumber,sex,username,password,create_time,update_time,name,phone,email,status from employee
+        where username = #{username}
+    </select>
+
+    <update id="setNewPasswd" parameterType="java.util.Map">
+        update employee
+        set password = #{newPasswd}
+        where email = #{email}
+    </update>
+    <insert id="empRegister" parameterType="com.lpy.news.entity.Employee">
+        insert into employee (id,name,email,username,password,update_time,create_time)
+        values (#{id},#{name},#{email},#{username},#{password},#{updateTime},#{createTime})
+    </insert>
+    <select id="getEmpEmail" resultType="com.lpy.news.entity.Employee">
+        select email from employee
+        where email = #{email}
+    </select>
+</mapper>
