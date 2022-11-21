@@ -8,11 +8,16 @@
     <update id="removeDivide" parameterType="com.lpy.news.entity.Divide">
         update divide
         set status = 0
-        where id = #{id}
+        where id = #{id};
     </update>
     <select id="queryDividePage" resultType="com.lpy.news.entity.Divide">
         select  id,sort,name,create_time,update_time from divide
-        where status= 1
+        <where>
+            status = 1
+            <if test="name != null and name!= ''" >
+                and name = #{name}
+            </if>
+        </where>
         order by id  limit ${pageNo}, ${pageSize};
     </select>
     <select id="queryDivideCount" resultType="java.lang.Integer">
@@ -23,9 +28,13 @@
         update divide
         set name = #{name},
             update_time = #{updateTime}
-        where id = #{id}
+        where id = #{id};
     </update>
     <select id="selectDivideById" resultType="com.lpy.news.entity.Divide">
         select id,sort,name,create_time,update_time from divide where id = #{id} and status = 1;
+    </select>
+    <select id="selectDivideByName" resultType="java.lang.Long">
+        select id from divide
+        where name = #{name};
     </select>
 </mapper>

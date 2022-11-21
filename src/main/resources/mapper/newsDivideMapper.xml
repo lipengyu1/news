@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.NewsDivideDao">
+    <insert id="saveNewsDivide" parameterType="com.lpy.news.entity.NewsDivide">
+        insert into news_divide(id,news_id,divide_id,divide_name,news_title)
+        values (#{id},#{newsId},#{divideId},#{divideName},#{newsTitle})
+    </insert>
+    <delete id="removeNewsDivide" parameterType="com.lpy.news.entity.NewsDivide">
+        delete from news_divide
+        where news_id = #{id};
+    </delete>
+    <update id="updataNewsDivide" parameterType="com.lpy.news.entity.NewsDivide">
+        update news_divide
+        set
+            divide_id = #{divideId},
+            divide_name = #{divideName},
+            news_title = #{newsTitle}
+        where news_id = #{newsId};
+    </update>
+</mapper>

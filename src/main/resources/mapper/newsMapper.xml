@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.NewsDao">
+    <insert id="saveNews" parameterType="com.lpy.news.dto.NewsDto">
+        insert into news
+            (id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time)
+        values
+               (#{id},#{title},#{keywds}, #{author}, #{essay},#{picture1},#{picture2},#{picture3},#{publishHouse},#{publicationTime},#{createTime});
+    </insert>
+    <update id="removeNews" parameterType="com.lpy.news.entity.News">
+        update news
+        set status = 0
+        where id = #{id};
+    </update>
+    <select id="queryNewsPage" resultType="com.lpy.news.dto.NewsDto">
+        select  news.id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time,news_divide.divide_name
+        from news inner join news_divide
+        on news.id = news_divide.news_id
+        <where>
+            status = 1
+            <if test="author != null and author!= ''" >
+                and news.author = #{author}
+            </if>
+            <if test="divideName != null and divideName!= ''" >
+                and news_divide.divide_name = #{divideName}
+            </if>
+        </where>
+        order by id  limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="queryNewsCount" resultType="java.lang.Integer">
+        select count(*) from news
+        where status= 1;
+    </select>
+    <update id="updateNews" parameterType="com.lpy.news.entity.News">
+        update news
+        set title = #{title},
+            keywds = #{keywds},
+            author=#{author},
+            essay = #{essay},
+            publish_house = #{publishHouse},
+            publication_time = #{publicationTime}
+        where id = #{id};
+    </update>
+    <select id="selectNewsById" resultType="com.lpy.news.dto.NewsDto">
+        select  news.id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time,news_divide.divide_name
+        from news inner join news_divide
+        on news.id = news_divide.news_id
+        where news.id = #{id} and status = 1;
+    </select>
+</mapper>

@@ -1,11 +1,12 @@
-package com.lpy.news.entity;
+package com.lpy.news.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class News {
+public class NewsDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -44,8 +45,7 @@ public class News {
      */
     private LocalDateTime createTime;
     /**
-     * 状态
+     * 分类名称
      */
-    private Integer status;
-
+    private String divideName;
 }

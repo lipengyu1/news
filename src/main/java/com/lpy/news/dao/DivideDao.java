@@ -17,4 +17,6 @@ public interface DivideDao {
     void updateDivide(Divide divide);
 
     Divide selectDivideById(Long id);
+
+    Long selectDivideByName(String name);
 }
