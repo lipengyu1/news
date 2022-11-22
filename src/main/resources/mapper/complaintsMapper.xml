@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.ComplaintsDao">
+    <insert id="saveComplaints" parameterType="com.lpy.news.dto.ComplaintsDto">
+        insert into complaints (id,user_id,complaints_category,complaints_content,complaints_time)
+        values (#{id},#{userId}, #{complaintsCategory}, #{complaintsContent},#{complaintsTime});
+    </insert>
+    <update id="removeComplaints" parameterType="com.lpy.news.dto.ComplaintsDto">
+        update complaints
+        set status = 0
+        where id = #{id}
+    </update>
+    <select id="queryComplaintsPage" resultType="com.lpy.news.dto.ComplaintsDto">
+        select id,user_id,complaints_category,complaints_content,complaints_time from complaints
+        <where>
+            status = 1
+            <if test="complaintsCategory != null and complaintsCategory!= ''" >
+                and complaints_category = #{complaintsCategory}
+            </if>
+            <if test="complaintsTime != null and complaintsTime!= ''" >
+                and complaints_time = #{complaintsTime}
+            </if>
+        </where>
+        order by id  limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="queryComplaintsCount" resultType="java.lang.Integer">
+        select count(*) from complaints
+        <where>
+            status = 1
+            <if test="complaintsCategory != null and complaintsCategory!= ''" >
+                and complaints_category = #{complaintsCategory}
+            </if>
+            <if test="complaintsTime != null and complaintsTime!= ''" >
+                and complaints_time = #{complaintsTime}
+            </if>
+        </where>
+    </select>
+</mapper>
