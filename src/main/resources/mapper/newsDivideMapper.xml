@@ -17,4 +17,7 @@
             news_title = #{newsTitle}
         where news_id = #{newsId};
     </update>
+    <select id="selectNewDividesByDivideId" resultType="com.lpy.news.entity.News">
+        select divide_id from news_divide where divide_id = #{id}
+    </select>
 </mapper>

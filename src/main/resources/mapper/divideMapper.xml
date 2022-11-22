@@ -35,6 +35,6 @@
     </select>
     <select id="selectDivideByName" resultType="java.lang.Long">
         select id from divide
-        where name = #{name};
+        where name = #{name} and status = 1;
     </select>
 </mapper>

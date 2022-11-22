@@ -1,8 +1,11 @@
 package com.lpy.news.service.impl;
 
 import com.lpy.news.common.BasePageResponse;
+import com.lpy.news.common.CustomException;
 import com.lpy.news.dao.DivideDao;
+import com.lpy.news.dao.NewsDivideDao;
 import com.lpy.news.entity.Divide;
+import com.lpy.news.entity.News;
 import com.lpy.news.service.DivideService;
 import com.lpy.news.service.SnowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import java.util.List;
 public class DivideServiceImpl implements DivideService {
     SnowService snowService = new SnowService(1, 1);
     @Autowired
+    NewsDivideDao newsDivideDao;
+    @Autowired
     DivideDao divideDao;
     @Override
     public void saveDivide(Divide divide) {
@@ -27,6 +32,13 @@ public class DivideServiceImpl implements DivideService {
 
     @Override
     public void removeDivide(Long[] ids) {
+        for (int i = 0; i <ids.length; i++) {
+            Long id = ids[i];
+            List<News> newsList = newsDivideDao.selectNewDividesByDivideId(id);
+            if (!(newsList.isEmpty())){
+                throw new CustomException("该分类使用中，无法删除");
+            }
+        }
         for (int i = 0; i <ids.length; i++) {
             Long id = ids[i];
             divideDao.removeDivide(id);
