@@ -1,9 +1,7 @@
 package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
-import com.lpy.news.dto.NoticeDto;
 import com.lpy.news.entity.Divide;
-import com.lpy.news.entity.Notice;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.DivideServiceImpl;
 import io.swagger.annotations.Api;

@@ -10,7 +10,7 @@ public interface ComplaintsDao {
 
     void removeComplaints(Long id);
 
-    List<ComplaintsDto> queryComplaintsPage(int pageNo, int pageSize, String complaintsCategory, LocalDateTime complaintsTime);
+    List<ComplaintsDto> queryComplaintsPage(int pageNo, int pageSize, String complaintsCategory);
 
-    int queryComplaintsCount(int pageNo, int pageSize, String complaintsCategory, LocalDateTime complaintsTime);
+    int queryComplaintsCount(int pageNo, int pageSize, String complaintsCategory);
 }

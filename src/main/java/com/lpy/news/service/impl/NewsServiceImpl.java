@@ -6,8 +6,6 @@ import com.lpy.news.dao.DivideDao;
 import com.lpy.news.dao.NewsDao;
 import com.lpy.news.dao.NewsDivideDao;
 import com.lpy.news.dto.NewsDto;
-import com.lpy.news.entity.Divide;
-import com.lpy.news.entity.News;
 import com.lpy.news.entity.NewsDivide;
 import com.lpy.news.service.NewsService;
 import com.lpy.news.service.SnowService;

@@ -2,8 +2,6 @@ package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.ComplaintsDto;
-import com.lpy.news.dto.NoticeDto;
-import com.lpy.news.entity.Notice;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.ComplaintsServiceImpl;
 import io.swagger.annotations.Api;
@@ -14,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
@@ -54,7 +51,6 @@ public class ComplaintsController {
      * @param pageNo
      * @param pageSize
      * @param complaintsCategory
-     * @param complaintsTime
      * @return
      */
     @GetMapping("/page")
@@ -63,11 +59,10 @@ public class ComplaintsController {
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
             @ApiImplicitParam(name = "complaintsCategory",value = "投诉类别",required = false),
-            @ApiImplicitParam(name = "complaintsTime",value = "投诉时间",required = false)
     })
-    public Response<BasePageResponse<ComplaintsDto>> page(int pageNo, int pageSize, String complaintsCategory, LocalDateTime complaintsTime){
-        log.info("pageNo={},pageSize={},complaintsCategory={},complaintsTime={}",pageNo,pageSize,complaintsCategory,complaintsTime);
-        BasePageResponse<ComplaintsDto> response = complaintsService.queryComplaintsPage(pageNo,pageSize,complaintsCategory,complaintsTime);
+    public Response<BasePageResponse<ComplaintsDto>> page(int pageNo, int pageSize, String complaintsCategory){
+        log.info("pageNo={},pageSize={},complaintsCategory={},complaintsTime={}",pageNo,pageSize,complaintsCategory);
+        BasePageResponse<ComplaintsDto> response = complaintsService.queryComplaintsPage(pageNo,pageSize,complaintsCategory);
         return Response.success(response);
     }
 }

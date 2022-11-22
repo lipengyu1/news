@@ -2,8 +2,6 @@ package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.NewsDto;
-import com.lpy.news.entity.Divide;
-import com.lpy.news.entity.News;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.NewsServiceImpl;
 import io.swagger.annotations.Api;

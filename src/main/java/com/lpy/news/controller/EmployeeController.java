@@ -4,7 +4,6 @@ import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.EmployeeDto;
 import com.lpy.news.model.Response;
 import com.lpy.news.entity.Employee;
-import com.lpy.news.service.SnowService;
 import com.lpy.news.service.impl.EmployeeServiceImpl;
 import com.lpy.news.utils.ValidateCodeUtils;
 import io.swagger.annotations.Api;

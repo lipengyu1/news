@@ -1,6 +1,5 @@
 package com.lpy.news.dao;
 
-import com.lpy.news.dto.NewsDto;
 import com.lpy.news.entity.News;
 import com.lpy.news.entity.NewsDivide;
 

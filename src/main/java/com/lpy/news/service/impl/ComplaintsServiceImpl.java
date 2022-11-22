@@ -3,13 +3,11 @@ package com.lpy.news.service.impl;
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dao.ComplaintsDao;
 import com.lpy.news.dto.ComplaintsDto;
-import com.lpy.news.dto.NoticeDto;
 import com.lpy.news.service.ComplaintsService;
 import com.lpy.news.service.SnowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +32,11 @@ public class ComplaintsServiceImpl implements ComplaintsService {
     }
 
     @Override
-    public BasePageResponse<ComplaintsDto> queryComplaintsPage(int pageNo, int pageSize, String complaintsCategory, LocalDateTime complaintsTime) {
+    public BasePageResponse<ComplaintsDto> queryComplaintsPage(int pageNo, int pageSize, String complaintsCategory) {
         int pageNo1 = pageSize * (pageNo - 1);
-        List<ComplaintsDto> queryList = complaintsDao.queryComplaintsPage(pageNo1,pageSize,complaintsCategory,complaintsTime);
+        List<ComplaintsDto> queryList = complaintsDao.queryComplaintsPage(pageNo1,pageSize,complaintsCategory);
         ArrayList<ComplaintsDto> arrayList = new ArrayList<>(queryList);
-        int totalCount = complaintsDao.queryComplaintsCount(pageNo1,pageSize,complaintsCategory,complaintsTime);
+        int totalCount = complaintsDao.queryComplaintsCount(pageNo1,pageSize,complaintsCategory);
         BasePageResponse<ComplaintsDto> basePageResponse = new BasePageResponse<>();
         basePageResponse.setPageNo(pageNo);
         basePageResponse.setPageSize(pageSize);

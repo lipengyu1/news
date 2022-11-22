@@ -1,6 +1,5 @@
 package com.lpy.news.service;
 
-import org.springframework.stereotype.Service;
 
 /**
  * 雪花算法生成id
