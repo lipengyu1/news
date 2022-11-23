@@ -1,11 +1,11 @@
-package com.lpy.news.entity;
+package com.lpy.news.dto;
 
 import lombok.Data;
 
-@Data
-public class User {
-    private static final long serialVersionUID = 1L;
+import java.io.Serializable;
 
+@Data
+public class UserDto implements Serializable {
     private Long id;
     /**
      * 姓名
@@ -20,7 +20,7 @@ public class User {
      */
     private String phone;
     /**
-     * 邮箱（账号）
+     * 邮箱
      */
     private String email;
     /**
@@ -35,9 +35,4 @@ public class User {
      * 头像
      */
     private String avatar;
-    /**
-     * 1正常0删除
-     */
-    private Integer status;
-
 }

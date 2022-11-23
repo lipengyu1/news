@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.UserDao">
+    <select id="userLogin" resultType="com.lpy.news.entity.User">
+        select id,name,sex,phone,email,password,id_number,avatar,status from user
+        where email = #{email};
+    </select>
+    <select id="getUserEmail" resultType="com.lpy.news.entity.User">
+        select email from user
+        where email = #{email};
+    </select>
+    <update id="userRegister" parameterType="com.lpy.news.entity.User">
+        insert into user (id,name,sex,phone,email,password,id_number)
+        values (#{id},#{name},#{sex},#{phone},#{email},#{password},#{idNumber});
+    </update>
+    <update id="setNewPasswd" parameterType="com.lpy.news.entity.User">
+        update user
+        set password = #{newPasswd}
+        where email = #{email}
+    </update>
+    <select id="selectUserById" resultType="com.lpy.news.entity.User">
+        select id,name,sex,phone,email,password,id_number,avatar,status from user
+        where id = #{id};
+    </select>
+    <select id="queryUserPage" resultType="com.lpy.news.dto.UserDto">
+        select id,name,sex,phone,email,password,id_number,avatar from user
+        <where>
+            status = 1
+            <if test="name != null and name!= ''" >
+                and name = #{name}
+            </if>
+            <if test="email != null and email!= ''" >
+                and email = #{email}
+            </if>
+        </where>
+        order by id  limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="queryUserCount" resultType="java.lang.Integer">
+        select count(*) from user
+        <where>
+            status = 1
+            <if test="name != null and name!= ''" >
+                and name = #{name}
+            </if>
+            <if test="email != null and email!= ''" >
+                and email = #{email}
+            </if>
+        </where>
+    </select>
+    <update id="removeUser" parameterType="com.lpy.news.entity.User">
+        update user
+        set status = 0
+        where id = #{id};
+    </update>
+    <update id="updateUser" parameterType="com.lpy.news.dto.UserDto">
+        update user
+        set name = #{name},
+            sex = #{sex},
+            phone = #{phone},
+            email = #{email},
+            password = #{password},
+            id_number = #{idNumber},
+            avatar = #{avatar}
+        where id = #{id}
+    </update>
+</mapper>
