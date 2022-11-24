@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.CommentsDao">
+    <insert id="saveComments" parameterType="com.lpy.news.entity.Comments">
+        insert into comments (id,user_id,news_id,comments_content,comments_time)
+        values (#{id},#{userId}, #{newsId}, #{commentsContent},#{commentsTime});
+    </insert>
+    <select id="queryCommentsPage" resultType="com.lpy.news.dto.CommentsDto">
+        select id,user_id,news_id,comments_content,comments_time from comments
+        <where>
+            status = 1
+            <if test="stateNum != null and stateNum!= ''" >
+                and state = #{stateNum}
+            </if>
+        </where>
+        order by id  limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="queryCommentsCount" resultType="java.lang.Integer">
+        select count(*) from comments
+        <where>
+            status = 1
+            <if test="stateNum != null and stateNum!= ''" >
+                and state = #{stateNum}
+            </if>
+        </where>
+        order by id  limit ${pageNo}, ${pageSize};
+    </select>
+    <update id="removeComments" parameterType="com.lpy.news.dto.CommentsDto">
+        update comments
+        set status = 0
+        where id = #{id};
+    </update>
+    <update id="updateComments" parameterType="com.lpy.news.dto.CommentsDto">
+        update comments
+        set state = #{state}
+        where id = #{id} and status = 1
+    </update>
+</mapper>

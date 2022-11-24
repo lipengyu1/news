@@ -1,9 +1,7 @@
 package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
-import com.lpy.news.dto.EmployeeDto;
 import com.lpy.news.dto.UserDto;
-import com.lpy.news.entity.Employee;
 import com.lpy.news.entity.User;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.UserServiceImpl;
