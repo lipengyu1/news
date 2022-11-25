@@ -23,7 +23,6 @@
                 and state = #{stateNum}
             </if>
         </where>
-        order by id  limit ${pageNo}, ${pageSize};
     </select>
     <update id="removeComments" parameterType="com.lpy.news.dto.CommentsDto">
         update comments

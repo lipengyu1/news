@@ -22,7 +22,12 @@
     </select>
     <select id="queryDivideCount" resultType="java.lang.Integer">
         select count(*) from divide
-        where status= 1;
+        <where>
+            status = 1
+            <if test="name != null and name!= ''" >
+                and name = #{name}
+            </if>
+        </where>
     </select>
     <update id="updateDivide" parameterType="com.lpy.news.entity.Divide">
         update divide
