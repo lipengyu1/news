@@ -32,6 +32,7 @@
     <update id="updateDivide" parameterType="com.lpy.news.entity.Divide">
         update divide
         set name = #{name},
+            sort = #{sort},
             update_time = #{updateTime}
         where id = #{id};
     </update>

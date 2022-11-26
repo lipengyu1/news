@@ -24,6 +24,9 @@ public class DivideServiceImpl implements DivideService {
     DivideDao divideDao;
     @Override
     public void saveDivide(Divide divide) {
+        if(divideDao.selectDivideByName(divide.getName()) != null){
+            throw new CustomException("该分类已存在");
+        }
         divide.setId(snowService.getId());
         divide.setCreateTime(LocalDateTime.now());
         divide.setUpdateTime(LocalDateTime.now());
