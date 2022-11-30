@@ -80,7 +80,8 @@ public class EmployeeController {
         if (emp.getStatus() == 0) {
             return Response.error("账号已禁用");
         }
-        httpServletRequest.getSession().setAttribute("employee", emp.getName());
+        httpServletRequest.getSession().setAttribute("employee", emp.getId());
+        httpServletRequest.getSession().setAttribute("employeeName", emp.getName());
         return Response.success(emp);
     }
 
