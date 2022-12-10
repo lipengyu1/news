@@ -17,9 +17,6 @@
             <if test="complaintsCategory != null and complaintsCategory!= ''" >
                 and complaints_category = #{complaintsCategory}
             </if>
-            <if test="complaintsTime != null and complaintsTime!= ''" >
-                and complaints_time = #{complaintsTime}
-            </if>
         </where>
         order by id  limit ${pageNo}, ${pageSize};
     </select>
@@ -29,9 +26,6 @@
             status = 1
             <if test="complaintsCategory != null and complaintsCategory!= ''" >
                 and complaints_category = #{complaintsCategory}
-            </if>
-            <if test="complaintsTime != null and complaintsTime!= ''" >
-                and complaints_time = #{complaintsTime}
             </if>
         </where>
     </select>

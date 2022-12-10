@@ -61,7 +61,7 @@ public class ComplaintsController {
             @ApiImplicitParam(name = "complaintsCategory",value = "投诉类别",required = false),
     })
     public Response<BasePageResponse<ComplaintsDto>> page(int pageNo, int pageSize, String complaintsCategory){
-        log.info("pageNo={},pageSize={},complaintsCategory={},complaintsTime={}",pageNo,pageSize,complaintsCategory);
+        log.info("pageNo={},pageSize={},complaintsCategory={}",pageNo,pageSize,complaintsCategory);
         BasePageResponse<ComplaintsDto> response = complaintsService.queryComplaintsPage(pageNo,pageSize,complaintsCategory);
         return Response.success(response);
     }
