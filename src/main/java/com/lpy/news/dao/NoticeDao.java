@@ -10,9 +10,9 @@ public interface NoticeDao {
 
     void removeNotice(Long id);
 
-    List<NoticeDto> queryNoticePage(int pageNo, int pageSize, String name);
+    List<NoticeDto> queryNoticePage(int pageNo, int pageSize, String createPerson);
 
-    int queryNoticeCount(int pageNo, int pageSize, String name);
+    int queryNoticeCount(int pageNo, int pageSize, String createPerson);
 
     void updateNotice(Notice notice);
 

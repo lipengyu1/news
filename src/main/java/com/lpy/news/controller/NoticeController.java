@@ -59,11 +59,11 @@ public class NoticeController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
-            @ApiImplicitParam(name = "name",value = "名称(暂不使用)",required = false)
+            @ApiImplicitParam(name = "createPerson",value = "创建者姓名",required = false)
     })
-    public Response<BasePageResponse<NoticeDto>> page(int pageNo, int pageSize, String name){
-        log.info("pageNo={},pageSize={},name={}",pageNo,pageSize,name);
-        BasePageResponse<NoticeDto> response = noticeService.queryNoticePage(pageNo,pageSize,name);
+    public Response<BasePageResponse<NoticeDto>> page(int pageNo, int pageSize, String createPerson){
+        log.info("pageNo={},pageSize={},createPerson={}",pageNo,pageSize,createPerson);
+        BasePageResponse<NoticeDto> response = noticeService.queryNoticePage(pageNo,pageSize,createPerson);
         return Response.success(response);
     }
 

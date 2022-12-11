@@ -11,13 +11,23 @@
         where id = #{id}
     </update>
     <select id="queryNoticePage" resultType="com.lpy.news.dto.NoticeDto">
-        select  id,content,create_time,update_time from notice
-        where status= 1
+        select  id,content,create_time,update_time,create_person,user_id from notice
+        <where>
+            status = 1
+            <if test="createPerson != null and createPerson!= ''" >
+                and create_person = #{createPerson}
+            </if>
+        </where>
         order by id  limit ${pageNo}, ${pageSize};
     </select>
     <select id="queryNoticeCount" resultType="java.lang.Integer">
         select count(*) from notice
-        where status= 1;
+        <where>
+            status = 1
+            <if test="createPerson != null and createPerson!= ''" >
+                and create_person = #{createPerson}
+            </if>
+        </where>
     </select>
     <update id="updateNotice" parameterType="com.lpy.news.entity.Notice">
         update notice

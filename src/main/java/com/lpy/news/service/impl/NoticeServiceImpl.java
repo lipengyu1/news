@@ -54,11 +54,11 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public BasePageResponse<NoticeDto> queryNoticePage(int pageNo, int pageSize, String name) {
+    public BasePageResponse<NoticeDto> queryNoticePage(int pageNo, int pageSize, String createPerson) {
         int pageNo1 = pageSize * (pageNo - 1);
-        List<NoticeDto> queryList = noticeDao.queryNoticePage(pageNo1,pageSize,name);
+        List<NoticeDto> queryList = noticeDao.queryNoticePage(pageNo1,pageSize,createPerson);
         ArrayList<NoticeDto> arrayList = new ArrayList<>(queryList);
-        int totalCount = noticeDao.queryNoticeCount(pageNo1,pageSize,name);
+        int totalCount = noticeDao.queryNoticeCount(pageNo1,pageSize,createPerson);
         BasePageResponse<NoticeDto> basePageResponse = new BasePageResponse<>();
         basePageResponse.setPageNo(pageNo);
         basePageResponse.setPageSize(pageSize);
