@@ -19,6 +19,14 @@ public class NoticeDto implements Serializable {
      */
     private LocalDateTime createTime;
     /**
+     * 创建人
+     */
+    private String createPerson;
+    /**
+     * 创建者id
+     */
+    private Long userId;
+    /**
      * 更新时间
      */
     private LocalDateTime updateTime;

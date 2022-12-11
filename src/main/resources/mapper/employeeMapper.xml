@@ -61,4 +61,7 @@
         select email from employee
         where email = #{email};
     </select>
+    <select id="selectEmpNameById" resultType="com.lpy.news.entity.Employee">
+        select name from Employee where id = #{id} and status = 1;
+    </select>
 </mapper>

@@ -22,6 +22,14 @@ public class Notice {
      */
     private LocalDateTime updateTime;
     /**
+     * 创建人
+     */
+    private String createPerson;
+    /**
+     * 创建者id
+     */
+    private Long userId;
+    /**
      * 1正常0删除
      */
     private Integer status;

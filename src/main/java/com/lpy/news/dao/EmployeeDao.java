@@ -24,4 +24,6 @@ public interface EmployeeDao {
     void empRegister(Employee employee);
 
     Employee getEmpEmail(String email);
+
+    Employee selectEmpNameById(Long id);
 }

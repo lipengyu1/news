@@ -1,8 +1,12 @@
 package com.lpy.news.service.impl;
 
+import com.lpy.news.common.BaseContext;
 import com.lpy.news.common.BasePageResponse;
+import com.lpy.news.common.CustomException;
+import com.lpy.news.dao.EmployeeDao;
 import com.lpy.news.dao.NoticeDao;
 import com.lpy.news.dto.NoticeDto;
+import com.lpy.news.entity.Employee;
 import com.lpy.news.entity.Notice;
 import com.lpy.news.service.NoticeService;
 import com.lpy.news.service.SnowService;
@@ -18,9 +22,24 @@ public class NoticeServiceImpl implements NoticeService {
     SnowService snowService = new SnowService(1, 1);
     @Autowired
     NoticeDao noticeDao;
+    @Autowired
+    EmployeeDao employeeDao;
     @Override
     public void saveNotice(NoticeDto noticeDto) {
         noticeDto.setId(snowService.getId());
+        Long userId = BaseContext.getCurrentId();
+        noticeDto.setUserId(userId);
+        Employee createEmp = null;
+        try {
+            createEmp = employeeDao.selectEmpNameById(userId);
+        } catch (Exception e) {
+            throw new CustomException("用户id错误");
+        }
+        try {
+            noticeDto.setCreatePerson(createEmp.getName());
+        } catch (Exception e) {
+            throw new CustomException("用户名错误");
+        }
         noticeDto.setCreateTime(LocalDateTime.now());
         noticeDto.setUpdateTime(LocalDateTime.now());
         noticeDao.saveNotice(noticeDto);
