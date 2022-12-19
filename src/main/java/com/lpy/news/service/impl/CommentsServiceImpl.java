@@ -1,6 +1,5 @@
 package com.lpy.news.service.impl;
 
-import com.lpy.news.common.BaseContext;
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.common.CustomException;
 import com.lpy.news.dao.CommentsDao;
@@ -25,10 +24,7 @@ public class CommentsServiceImpl implements CommentsService {
     @Override
     public void saveComments(CommentsDto commentsDto) {
         commentsDto.setId(snowService.getId());
-        //设置用户id，指定当前是哪个用户的评论数据
-        Long userId = BaseContext.getCurrentId();
         commentsDto.setCommentsTime(LocalDateTime.now());
-        commentsDto.setUserId(userId);
         commentsDao.saveComments(commentsDto);
     }
 

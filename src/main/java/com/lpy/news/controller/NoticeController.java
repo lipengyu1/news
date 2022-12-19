@@ -5,6 +5,7 @@ import com.lpy.news.dto.NoticeDto;
 import com.lpy.news.entity.Notice;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.NoticeServiceImpl;
+import com.lpy.news.utils.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -12,6 +13,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
@@ -28,8 +31,9 @@ public class NoticeController {
      */
     @PostMapping
     @ApiOperation(value = "新增公告接口")
-    public Response<String> save(@RequestBody NoticeDto noticeDto){
+    public Response<String> save(HttpServletRequest request, @RequestBody NoticeDto noticeDto){
         log.info(noticeDto.toString());
+        noticeDto.setUserId(Long.valueOf(JwtUtils.getUserId(request.getHeader("token"))));
         noticeService.saveNotice(noticeDto);
         return Response.success("新增公告成功");
     }

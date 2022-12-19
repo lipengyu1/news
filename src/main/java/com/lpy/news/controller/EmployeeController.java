@@ -5,6 +5,7 @@ import com.lpy.news.dto.EmployeeDto;
 import com.lpy.news.model.Response;
 import com.lpy.news.entity.Employee;
 import com.lpy.news.service.impl.EmployeeServiceImpl;
+import com.lpy.news.utils.JwtUtils;
 import com.lpy.news.utils.ValidateCodeUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -18,6 +19,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -80,7 +82,14 @@ public class EmployeeController {
         if (emp.getStatus() == 0) {
             return Response.error("账号已禁用");
         }
-        httpServletRequest.getSession().setAttribute("employee", emp.getId());
+
+        //准备存放在IWT中的自定义数据
+        Map<String, Object> info = new HashMap<>();
+        info.put("username", emp.getUsername());
+        info.put("pass", emp.getPassword());
+        //生成token
+        String token = JwtUtils.sign(emp.getId(), info);
+        emp.setToken(token);
         return Response.success(emp);
     }
 

@@ -1,11 +1,12 @@
 package com.lpy.news.service.impl;
 
-import com.lpy.news.common.BaseContext;
 import com.lpy.news.dao.UserMessageDao;
 import com.lpy.news.dto.UserMessageDto;
 import com.lpy.news.service.UserMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class UserMessageServiceImpl implements UserMessageService {
@@ -13,9 +14,7 @@ public class UserMessageServiceImpl implements UserMessageService {
     @Autowired
     private UserMessageDao userMessageDao;
     @Override
-    public UserMessageDto queryAllMessage() {
-        Long userId = BaseContext.getCurrentId();
-        System.out.println(userId);
+    public ArrayList<UserMessageDto> queryAllMessage(Long userId) {
         return userMessageDao.queryAllMessage(userId);
     }
 

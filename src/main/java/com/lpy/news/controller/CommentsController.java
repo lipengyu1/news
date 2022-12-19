@@ -4,6 +4,7 @@ import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.CommentsDto;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.CommentsServiceImpl;
+import com.lpy.news.utils.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -11,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
@@ -26,8 +29,9 @@ public class CommentsController {
      */
     @PostMapping
     @ApiOperation(value = "新增评论接口")
-    public Response<String> save(@RequestBody CommentsDto commentsDto){
+    public Response<String> save(@RequestBody CommentsDto commentsDto, HttpServletRequest request){
         log.info(commentsDto.toString());
+        commentsDto.setUserId(Long.valueOf(JwtUtils.getUserId(request.getHeader("token"))));
         commentsService.saveComments(commentsDto);
         return Response.success("新增评论成功");
     }

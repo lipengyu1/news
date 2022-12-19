@@ -91,6 +91,12 @@
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>3.0.2</version>
         </dependency>
+        <!-- 引入操作JWT的相关依赖 -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.10.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -6,11 +6,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class UserMessageDto {
-    private Long id;
-    /**
-     * 用户id
-     */
-    private Long userId;
     /**
      * 消息内容
      */

@@ -3,7 +3,7 @@
 <mapper namespace="com.lpy.news.dao.NoticeDao">
     <insert id="saveNotice" parameterType="com.lpy.news.entity.Notice">
         insert into notice (id,content,create_time,update_time,create_person,user_id)
-        values (#{id},#{content}, #{createTime}, #{updateTime},{createPerson},#{userId});
+        values (#{id},#{content}, #{createTime}, #{updateTime},#{createPerson},#{userId});
     </insert>
     <update id="removeNotice" parameterType="com.lpy.news.entity.Notice">
         update notice

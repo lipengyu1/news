@@ -49,4 +49,8 @@ public class Employee implements Serializable {
      * 状态1正常0删除
      */
     private Integer status;
+    /**
+     * token
+     */
+    private String token;
 }

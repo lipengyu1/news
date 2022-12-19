@@ -1,16 +1,18 @@
 package com.lpy.news.controller;
 
 
-import com.lpy.news.dao.UserMessageDao;
 import com.lpy.news.dto.UserMessageDto;
-import com.lpy.news.entity.UserMessage;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.UserMessageServiceImpl;
+import com.lpy.news.utils.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 @Slf4j
 @RestController
@@ -22,14 +24,16 @@ public class UserMessageController {
     private UserMessageServiceImpl userMessageService;
 
     /**
-     * 展示用户消息
+     * 用户消息展示
+     * @param request
      * @return
      */
     @GetMapping("/query")
     @ApiOperation(value = "展示用户消息接口")
-    public Response<UserMessageDto> queryAllMessage(){
-        UserMessageDto userMessageDto = userMessageService.queryAllMessage();
-        return Response.success(userMessageDto);
+    public Response<ArrayList<UserMessageDto>> queryAllMessage(HttpServletRequest request){
+        Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
+        ArrayList<UserMessageDto> userMessageDtoArrayList = userMessageService.queryAllMessage(userId);
+        return Response.success(userMessageDtoArrayList);
     }
 
     /**

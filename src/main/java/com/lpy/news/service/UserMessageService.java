@@ -2,8 +2,10 @@ package com.lpy.news.service;
 
 import com.lpy.news.dto.UserMessageDto;
 
+import java.util.ArrayList;
+
 public interface UserMessageService {
-    UserMessageDto queryAllMessage();
+    ArrayList<UserMessageDto> queryAllMessage(Long userId);
 
     void removeMessage(Long[] ids);
 }

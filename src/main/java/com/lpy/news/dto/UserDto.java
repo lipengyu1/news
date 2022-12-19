@@ -35,4 +35,8 @@ public class UserDto implements Serializable {
      * 头像
      */
     private String avatar;
+    /**
+     * token
+     */
+    private String token;
 }

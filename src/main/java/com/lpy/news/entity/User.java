@@ -39,5 +39,8 @@ public class User {
      * 1正常0删除
      */
     private Integer status;
-
+    /**
+     * token
+     */
+    private String token;
 }
