@@ -47,7 +47,7 @@ public class CommentsController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
-            @ApiImplicitParam(name = "state",value = "每页记录数",required = true)
+            @ApiImplicitParam(name = "state",value = "状态(通过;拒绝)",required = false)
     })
     public Response<BasePageResponse<CommentsDto>> page(int pageNo, int pageSize,String state){
         log.info("pageNo={},pageSize={},state={}",pageNo,pageSize,state);

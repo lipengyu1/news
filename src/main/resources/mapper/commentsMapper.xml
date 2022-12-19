@@ -6,7 +6,7 @@
         values (#{id},#{userId}, #{newsId}, #{commentsContent},#{commentsTime});
     </insert>
     <select id="queryCommentsPage" resultType="com.lpy.news.dto.CommentsDto">
-        select id,user_id,news_id,comments_content,comments_time from comments
+        select id,user_id,news_id,comments_content,comments_time,state from comments
         <where>
             status = 1
             <if test="stateNum != null and stateNum!= ''" >

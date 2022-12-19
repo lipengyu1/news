@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -34,8 +35,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         log.info("开始静态资源映射");
-//        registry.addResourceHandler("/backend/**").addResourceLocations("classpath:/backend/");
-//        registry.addResourceHandler("/front/**").addResourceLocations("classpath:/front/");
         registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
@@ -80,9 +79,18 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      * */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor())
-//                .addPathPatterns("/usermessage/query");
-                .addPathPatterns("/usermessage");
+        InterceptorRegistration registration = registry.addInterceptor(jwtInterceptor());
+        //所有路径都被拦截
+        registration.addPathPatterns("/**");
+        //添加不拦截路径
+        registration.excludePathPatterns(
+                "/back/login",
+                "/back/register",
+                "/back/sendMsg",
+                "/back/find",
+                "/back/logout"
+        );
+
     }
 
     /**
