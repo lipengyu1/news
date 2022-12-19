@@ -51,7 +51,7 @@ public class NoticeController {
      * 公告分页查询
      * @param pageNo
      * @param pageSize
-     * @param name
+     * @param createPerson
      * @return
      */
     @GetMapping("/page")

@@ -52,7 +52,6 @@ public class UserController {
             return Response.error("账号已禁用");
         }
         httpServletRequest.getSession().setAttribute("user", user1.getId());
-        httpServletRequest.getSession().setAttribute("userName", user1.getName());
         return Response.success(user1);
     }
 
