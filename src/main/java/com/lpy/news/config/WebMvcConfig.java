@@ -93,7 +93,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 "/employee/register",
                 "/employee/sendMsg",
                 "/employee/find",
-                "/employee/logout"
+                "/employee/logout",
+                "/doc.html",
+                "/webjars/**",
+                "/swagger-resources",
+                "/v2/api-docs",
+                "/common/upload",
+                "/common/download"
         );
 
     }
