@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.UserCollectionDao">
+    <insert id="addCollection" parameterType="com.lpy.news.dto.UserCollectionDto">
+        insert into user_collection(id,news_id,news_title,user_id,create_time)
+        values (#{id},#{newsId},#{newsTitle},#{userId},#{createTime});
+    </insert>
+    <update id="delCollection" parameterType="com.lpy.news.entity.UserCollection">
+        update user_collection
+        set status = 0
+        where id = #{id} and user_id = #{userId};
+    </update>
+    <select id="queryCollectionPage" resultType="com.lpy.news.dto.UserCollectionDto">
+        select id,news_id,news_title,user_id,create_time
+        from user_collection
+        where status = 1 and user_id = #{userId}
+        order by id  limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="queryCollectionPageCount" resultType="java.lang.Integer">
+        select count(*)
+        from user_collection
+        where status = 1 and user_id = #{userId}
+    </select>
+</mapper>
