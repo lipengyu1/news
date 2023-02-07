@@ -85,8 +85,8 @@ public class EmployeeController {
 
         //准备存放在IWT中的自定义数据
         Map<String, Object> info = new HashMap<>();
-        info.put("username", emp.getUsername());
-        info.put("pass", emp.getPassword());
+//        info.put("username", emp.getUsername());
+//        info.put("pass", emp.getPassword());
         //生成token
         String token = JwtUtils.sign(emp.getId(), info);
         emp.setToken(token);

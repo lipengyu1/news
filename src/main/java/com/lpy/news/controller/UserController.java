@@ -55,8 +55,8 @@ public class UserController {
         }
         //准备存放在IWT中的自定义数据
         Map<String, Object> info = new HashMap<>();
-        info.put("email", user1.getEmail());
-        info.put("pass", user1.getPassword());
+//        info.put("email", user1.getEmail());
+//        info.put("pass", user1.getPassword());
         //生成token
         String token = JwtUtils.sign(user1.getId(), info);
         user1.setToken(token);

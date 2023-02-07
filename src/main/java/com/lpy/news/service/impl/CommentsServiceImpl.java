@@ -63,6 +63,7 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Override
     public void updateComments(CommentsDto commentsDto) {
+        Integer state = commentsDto.getState();
         commentsDao.updateComments(commentsDto);
     }
 }

@@ -30,7 +30,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         //获取 token 中的其他数据
         Map<String, Object> info = JwtUtils.getInfo(token);
-        info.forEach((k, v) -> System.out.println(k + ":" + v));
+//        info.forEach((k, v) -> System.out.println(k + ":" + v));
         return true;
     }
 }
