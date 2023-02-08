@@ -1,6 +1,7 @@
 package com.lpy.news.controller;
 
 import com.lpy.news.model.Response;
+import com.lpy.news.service.impl.LikedServiceImpl;
 import com.lpy.news.service.impl.RedisServiceImpl;
 import com.lpy.news.utils.JwtUtils;
 import com.lpy.news.utils.RedisKeyUtils;
@@ -23,6 +24,8 @@ public class NewsLikeController {
     RedisTemplate redisTemplate;
     @Autowired
     RedisServiceImpl redisService;
+    @Autowired
+    LikedServiceImpl likedService;
     /**
      * 点赞
      * @return
@@ -61,23 +64,17 @@ public class NewsLikeController {
         return Response.success("取消失败");
     }
 
-    /**
-     * 获取所有文章点赞数据
-     * @return
-     */
-    @GetMapping("getlike")
-    public Response<List> getAllNewsLike(){
-        List num = redisService.getLikedDataFromRedis();
-        return Response.success(num);
-    }
+////手动同步接口
+//    @GetMapping("/get1")
+//    public Response<String> get1(){
+//        likedService.transLikedFromRedis2DB();
+//        return Response.success("ok");
+//    }
+//
+//    @GetMapping("/get2")
+//    public Response<String> get2(){
+//        likedService.transLikedCountFromRedis2DB();
+//        return Response.success("ok");
+//    }
 
-    /**
-     * 获取所有文章点赞数量
-     * @return
-     */
-    @GetMapping("getlikenum")
-    public Response<List> getAllNewsLikeNum(){
-        List num = redisService.getLikedCountFromRedis();
-        return Response.success(num);
-    }
 }

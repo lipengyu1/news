@@ -30,7 +30,7 @@ class NewsApplicationTests {
         info.put("email", "1169424910@qq.com");
         info.put("pass", "123456");
         //生成token
-        String id = "188057040541844480";
+        String id = "188057401906299904";
         Long userId = Long.valueOf(id);
         String token = JwtUtils.sign(userId, info);
         System.out.println(token);;

@@ -48,7 +48,7 @@ public class RedisServiceImpl implements RedisService {
 //   获取文章点赞详细数据
     @Override
     public List<NewsLike> getLikedDataFromRedis() {
-        Cursor<Map.Entry<Object, Object>> cursor =redisTemplate.opsForHash().scan(RedisKeyUtils.MAP_USER_LIKED, ScanOptions.NONE);
+        Cursor<Map.Entry<Object, Object>> cursor = redisTemplate.opsForHash().scan(RedisKeyUtils.MAP_USER_LIKED, ScanOptions.NONE);
         List<NewsLike> list = new ArrayList<>();
         while (cursor.hasNext()){
             Map.Entry<Object, Object> entry = cursor.next();
@@ -65,12 +65,13 @@ public class RedisServiceImpl implements RedisService {
             list.add(newsLike);
             //存到 list 后从 Redis 中删除
             redisTemplate.opsForHash().delete(RedisKeyUtils.MAP_USER_LIKED, key);
-        }        return list;
+        }
+        return list;
     }
 //    获取文章点赞量
     @Override
     public List<NewsLikeCount> getLikedCountFromRedis() {
-        Cursor<Map.Entry<Object, Object>> cursor =    redisTemplate.opsForHash().scan(RedisKeyUtils.MAP_NEWS_LIKED_COUNT,  ScanOptions.NONE);
+        Cursor<Map.Entry<Object, Object>> cursor = redisTemplate.opsForHash().scan(RedisKeyUtils.MAP_NEWS_LIKED_COUNT,  ScanOptions.NONE);
         List<NewsLikeCount> list = new ArrayList<>();
         while (cursor.hasNext()){
             Map.Entry<Object, Object> map = cursor.next();

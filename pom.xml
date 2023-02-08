@@ -97,6 +97,15 @@
             <artifactId>java-jwt</artifactId>
             <version>3.10.0</version>
         </dependency>
+        <!-- 开启定时任务-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

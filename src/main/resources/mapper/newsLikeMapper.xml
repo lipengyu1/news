@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.NewsLikeDao">
+    <insert id="saveNewsLike" parameterType="com.lpy.news.entity.NewsLikeDB">
+        insert into news_like(id,news_id,user_id,state,update_time)
+        values (#{id},#{newsId},#{userId},#{state},#{updateTime})
+    </insert>
+
+    <insert id="saveNewsLikeCount" parameterType="com.lpy.news.entity.NewsLikeCountDB">
+        insert into news_like_count(id,news_id,liked_count)
+        values (#{id},#{newsId},#{likedCount})
+    </insert>
+
+</mapper>
