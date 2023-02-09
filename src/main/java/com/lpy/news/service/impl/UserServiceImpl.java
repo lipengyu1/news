@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         String password = user.getPassword();
         password = DigestUtils.md5DigestAsHex(password.getBytes());
         user.setPassword(password);
+        user.setAvatar("f01be015-7976-45b5-959c-bb9f6d6d1c43.png");
         user.setId(snowService.getId());
         userDao.userRegister(user);
     }

@@ -9,10 +9,10 @@
         select email from user
         where email = #{email};
     </select>
-    <update id="userRegister" parameterType="com.lpy.news.entity.User">
-        insert into user (id,name,sex,phone,email,password,id_number)
-        values (#{id},#{name},#{sex},#{phone},#{email},#{password},#{idNumber});
-    </update>
+    <insert id="userRegister" parameterType="com.lpy.news.entity.User">
+        insert into user (id,name,sex,phone,avatar,email,password,id_number)
+        values (#{id},#{name},#{sex},#{phone},#{avatar},#{email},#{password},#{idNumber});
+    </insert>
     <update id="setNewPasswd" parameterType="com.lpy.news.entity.User">
         update user
         set password = #{newPasswd}
