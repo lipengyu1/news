@@ -42,7 +42,7 @@ public class NewsLikeController {
             redisService.incrementLikedCount(newsId);
             return Response.success("点赞成功");
         }
-        return Response.success("点赞失败，已点赞");
+        return Response.success("点赞失败，已点赞,请24小时后再来");
     }
     /**
      * 取消点赞
@@ -54,8 +54,6 @@ public class NewsLikeController {
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
         String id = newsId+"::"+userId;
         boolean liked = redisTemplate.opsForHash().hasKey(RedisKeyUtils.MAP_USER_LIKED,id);
-        System.out.println(liked);
-        System.out.println(redisTemplate.opsForHash().get(RedisKeyUtils.MAP_USER_LIKED,id));
         if ((liked==true)&&(redisTemplate.opsForHash().get(RedisKeyUtils.MAP_USER_LIKED,id).equals(1))){
             redisService.unlikeFromRedis(newsId,userId);
             redisService.decrementLikedCount(newsId);
