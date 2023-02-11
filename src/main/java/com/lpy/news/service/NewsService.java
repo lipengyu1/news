@@ -3,6 +3,9 @@ package com.lpy.news.service;
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.NewsDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public interface NewsService {
     void saveNews(NewsDto newsDto);
 
@@ -13,4 +16,6 @@ public interface NewsService {
     void updateNews(NewsDto newsDto);
 
     NewsDto selectNewsById(Long id);
+
+    ArrayList<NewsDto> queryHotNews();
 }

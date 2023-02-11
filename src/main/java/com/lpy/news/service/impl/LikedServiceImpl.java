@@ -1,10 +1,7 @@
 package com.lpy.news.service.impl;
 
-import com.lpy.news.dao.NewsDao;
 import com.lpy.news.dao.NewsLikeDao;
 import com.lpy.news.entity.NewsLike;
-import com.lpy.news.entity.NewsLikeCount;
-import com.lpy.news.entity.NewsLikeCountDB;
 import com.lpy.news.entity.NewsLikeDB;
 import com.lpy.news.service.LikedService;
 import com.lpy.news.service.RedisService;
@@ -45,14 +42,8 @@ public class LikedServiceImpl implements LikedService {
     @Override
     @Transactional
     public void transLikedCountFromRedis2DB() {
-        List<NewsLikeCount> list = redisService.getLikedCountFromRedis();
-        for (NewsLikeCount dto : list) {
-            NewsLikeCountDB newsLikeCountDB = new NewsLikeCountDB();
-            newsLikeCountDB.setId(snowService.getId());
-            newsLikeCountDB.setNewsId(dto.getNewsId());
-            newsLikeCountDB.setLikedCount(dto.getNewsLikeCount());
-            newsLikeDao.saveNewsLikeCount(newsLikeCountDB);
-        }
+        newsLikeDao.delNewsLikeCount();
+        newsLikeDao.saveNewsLikeCount();
     }
 }
 

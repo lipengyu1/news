@@ -2,6 +2,7 @@ package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.NewsDto;
+import com.lpy.news.entity.News;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.NewsServiceImpl;
 import io.swagger.annotations.Api;
@@ -11,6 +12,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -80,12 +85,12 @@ public class NewsController {
     }
 
     /**
-     * id查询（回显）
+     * id查询
      * @param id
      * @return
      */
     @GetMapping("/{id}")
-    @ApiOperation(value = "查询文章接口(id)")
+    @ApiOperation(value = "查询文章接口(id)回显，或用户前台查看详细内容")
     public Response<NewsDto> getById(@PathVariable Long id){
         log.info("根据id查询文章...");
         NewsDto news = newsService.selectNewsById(id);
@@ -93,5 +98,16 @@ public class NewsController {
             return Response.success(news);
         }
         return Response.error("未查询到文章");
+    }
+
+    /**
+     * 查询热点文章
+     * @return
+     */
+    @GetMapping("/hotNews")
+    @ApiOperation(value = "查询热点文章(前十)")
+    public Response<ArrayList<NewsDto>> getNewsLikeCount(){
+        ArrayList<NewsDto> list = newsService.queryHotNews();
+        return Response.success(list);
     }
 }

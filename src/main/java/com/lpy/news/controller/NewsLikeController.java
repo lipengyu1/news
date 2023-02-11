@@ -13,7 +13,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -61,18 +60,5 @@ public class NewsLikeController {
         }
         return Response.success("取消失败");
     }
-
-////手动同步接口
-//    @GetMapping("/get1")
-//    public Response<String> get1(){
-//        likedService.transLikedFromRedis2DB();
-//        return Response.success("ok");
-//    }
-//
-//    @GetMapping("/get2")
-//    public Response<String> get2(){
-//        likedService.transLikedCountFromRedis2DB();
-//        return Response.success("ok");
-//    }
 
 }

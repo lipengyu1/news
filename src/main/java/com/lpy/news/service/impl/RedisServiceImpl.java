@@ -68,21 +68,5 @@ public class RedisServiceImpl implements RedisService {
         }
         return list;
     }
-//    获取文章点赞量
-    @Override
-    public List<NewsLikeCount> getLikedCountFromRedis() {
-        Cursor<Map.Entry<Object, Object>> cursor = redisTemplate.opsForHash().scan(RedisKeyUtils.MAP_NEWS_LIKED_COUNT,  ScanOptions.NONE);
-        List<NewsLikeCount> list = new ArrayList<>();
-        while (cursor.hasNext()){
-            Map.Entry<Object, Object> map = cursor.next();
-            //将点赞数量存储在 newslikecount
-
-            NewsLikeCount dto = new NewsLikeCount((Long) map.getKey(),(Integer)map.getValue());
-            list.add(dto);
-            //从Redis中删除这条记录
-            redisTemplate.opsForHash().delete(RedisKeyUtils.MAP_NEWS_LIKED_COUNT, (Long) map.getKey());
-        }
-        return list;
-    }
 }
 

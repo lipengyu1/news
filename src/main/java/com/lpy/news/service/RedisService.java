@@ -27,9 +27,4 @@ public interface RedisService {
      * @return
      */
     List<NewsLike> getLikedDataFromRedis();
-    /**
-     * 获取Redis中存储的所有点赞数量
-     * @return
-     */
-    List<NewsLikeCount> getLikedCountFromRedis();
 }

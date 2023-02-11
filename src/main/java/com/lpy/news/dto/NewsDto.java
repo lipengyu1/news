@@ -48,4 +48,8 @@ public class NewsDto implements Serializable {
      * 分类名称
      */
     private String divideName;
+    /**
+     * 点赞量
+     */
+    private Integer likeCount;
 }

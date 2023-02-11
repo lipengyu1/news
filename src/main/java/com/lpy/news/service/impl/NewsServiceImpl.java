@@ -5,8 +5,10 @@ import com.lpy.news.common.CustomException;
 import com.lpy.news.dao.DivideDao;
 import com.lpy.news.dao.NewsDao;
 import com.lpy.news.dao.NewsDivideDao;
+import com.lpy.news.dao.NewsLikeDao;
 import com.lpy.news.dto.NewsDto;
 import com.lpy.news.entity.NewsDivide;
+import com.lpy.news.entity.NewsLikeCountDB;
 import com.lpy.news.service.NewsService;
 import com.lpy.news.service.SnowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import java.util.List;
 
 @Service
 public class NewsServiceImpl implements NewsService {
+    @Autowired
+    NewsLikeDao newsLikeDao;
     @Autowired
     DivideDao divideDao;
     @Autowired
@@ -92,6 +96,20 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public NewsDto selectNewsById(Long id) {
         NewsDto newsDto = newsDao.selectNewsById(id);
+        Integer num = newsLikeDao.selectNewsCountLike(id);
+        newsDto.setLikeCount(num);
         return newsDto;
+    }
+
+    @Override
+    public ArrayList<NewsDto> queryHotNews() {
+        ArrayList<NewsLikeCountDB> list = newsLikeDao.selectNewsId();
+        ArrayList<NewsDto> arrayList = new ArrayList();
+        for (NewsLikeCountDB newsLikeCountDB : list) {
+            NewsDto news = newsDao.selectNewsById(newsLikeCountDB.getNewsId());
+            news.setLikeCount(newsLikeCountDB.getLikedCount());
+            arrayList.add(news);
+        }
+        return arrayList;
     }
 }
