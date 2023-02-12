@@ -41,9 +41,5 @@ public class EmployeeDto implements Serializable {
      * 更新时间
      */
     private LocalDateTime updateTime;
-    /**
-     * token
-     */
-    private String token;
 }
 
