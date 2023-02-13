@@ -8,4 +8,6 @@ public interface UserMessageService {
     ArrayList<UserMessageDto> queryAllMessage(Long userId);
 
     void removeMessage(Long[] ids);
+
+    void addUserMessage(Long userId,String message);
 }

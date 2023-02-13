@@ -63,7 +63,7 @@ public class NewsController {
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
             @ApiImplicitParam(name = "divideName",value = "分类名称",required = false),
-            @ApiImplicitParam(name = "divideName",value = "作者名称",required = false)
+            @ApiImplicitParam(name = "author",value = "作者名称",required = false)
     })
     public Response<BasePageResponse<NewsDto>> page(int pageNo, int pageSize, String divideName,String author){
         log.info("pageNo={},pageSize={},divideName={},author={}",pageNo,pageSize,divideName,author);

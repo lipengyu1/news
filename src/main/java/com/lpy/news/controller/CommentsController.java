@@ -33,7 +33,7 @@ public class CommentsController {
         log.info(commentsDto.toString());
         commentsDto.setUserId(Long.valueOf(JwtUtils.getUserId(request.getHeader("token"))));
         commentsService.saveComments(commentsDto);
-        return Response.success("新增评论成功");
+        return Response.success("新增评论成功,请等待审核");
     }
 
     /**

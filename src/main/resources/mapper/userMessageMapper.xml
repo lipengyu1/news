@@ -11,4 +11,8 @@
         set status = 0
         where id = #{id}
     </update>
+    <insert id="addUserMessage" parameterType="com.lpy.news.entity.UserMessage" >
+        insert into user_message (id,user_id,message,create_time,status)
+        values (#{id},#{userId}, #{message}, #{createTime},#{status});
+    </insert>
 </mapper>

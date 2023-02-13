@@ -20,12 +20,15 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Autowired
     private CommentsDao commentsDao;
+    @Autowired
+    private UserMessageServiceImpl userMessageService;
 
     @Override
     public void saveComments(CommentsDto commentsDto) {
         commentsDto.setId(snowService.getId());
         commentsDto.setCommentsTime(LocalDateTime.now());
         commentsDao.saveComments(commentsDto);
+        userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论已发表，请等待审核，审核通过后方可显示");
     }
 
     @Override
@@ -65,5 +68,11 @@ public class CommentsServiceImpl implements CommentsService {
     public void updateComments(CommentsDto commentsDto) {
         Integer state = commentsDto.getState();
         commentsDao.updateComments(commentsDto);
+        System.out.println(commentsDto.getUserId());
+        if (state == 1){
+            userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论审核已通过");
+        }else {
+            userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论审核未通过");
+        }
     }
 }

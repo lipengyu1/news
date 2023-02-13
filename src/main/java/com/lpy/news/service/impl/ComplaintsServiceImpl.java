@@ -8,11 +8,14 @@ import com.lpy.news.service.SnowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ComplaintsServiceImpl implements ComplaintsService {
+    @Autowired
+    UserMessageServiceImpl userMessageService;
     @Autowired
     ComplaintsDao complaintsDao;
     SnowService snowService = new SnowService(1, 1);
@@ -20,7 +23,9 @@ public class ComplaintsServiceImpl implements ComplaintsService {
     @Override
     public void saveComplaints(ComplaintsDto complaintsDto) {
         complaintsDto.setId(snowService.getId());
+        complaintsDto.setComplaintsTime(LocalDateTime.now());
         complaintsDao.saveComplaints(complaintsDto);
+        userMessageService.addUserMessage(complaintsDto.getUserId(),"您的投诉我们已收到,感谢您的反馈");
     }
 
     @Override
