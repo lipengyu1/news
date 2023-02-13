@@ -30,7 +30,7 @@ public class NoticeController {
      * @return
      */
     @PostMapping
-    @ApiOperation(value = "新增公告接口")
+    @ApiOperation(value = "新增公告接口(后台)")
     public Response<String> save(HttpServletRequest request, @RequestBody NoticeDto noticeDto){
         log.info(noticeDto.toString());
         noticeDto.setUserId(Long.valueOf(JwtUtils.getUserId(request.getHeader("token"))));
@@ -44,7 +44,7 @@ public class NoticeController {
      * @return
      */
     @PutMapping("/del")
-    @ApiOperation(value = "删除公告接口")
+    @ApiOperation(value = "删除公告接口(后台)")
     public Response<String> delete(@RequestParam Long[] ids){
         log.info("ids:{}",ids);
         noticeService.removeNotice(ids);
@@ -59,7 +59,7 @@ public class NoticeController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询公告接口")
+    @ApiOperation(value = "分页查询公告接口(后台)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
@@ -77,7 +77,7 @@ public class NoticeController {
      * @return
      */
     @PutMapping
-    @ApiOperation(value = "修改公告接口")
+    @ApiOperation(value = "修改公告接口(后台)")
     public Response<String> update(@RequestBody Notice notice){
         log.info(notice.toString());
         noticeService.updateNotice(notice);
@@ -90,7 +90,7 @@ public class NoticeController {
      * @return
      */
     @GetMapping("/{id}")
-    @ApiOperation(value = "查询公告接口(id)")
+    @ApiOperation(value = "查询公告接口(id)(后台)")
     public Response<NoticeDto> getById(@PathVariable Long id){
         log.info("根据id查询公告...");
         NoticeDto notice = noticeService.selectNoticeById(id);

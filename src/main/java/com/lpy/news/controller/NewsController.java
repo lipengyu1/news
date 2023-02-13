@@ -30,7 +30,7 @@ public class NewsController {
      * @return
      */
     @PostMapping
-    @ApiOperation(value = "新增分类接口")
+    @ApiOperation(value = "新增分类接口(后台)")
     public Response<String> save(@RequestBody NewsDto newsDto){
         log.info("新增文章");
         newsService.saveNews(newsDto);
@@ -43,7 +43,7 @@ public class NewsController {
      * @return
      */
     @PutMapping("/del")
-    @ApiOperation(value = "删除文章接口")
+    @ApiOperation(value = "删除文章接口(后台)")
     public Response<String> delete(@RequestParam Long[] ids){
         log.info("ids:{}",ids);
         newsService.removeNews(ids);
@@ -58,7 +58,7 @@ public class NewsController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询文章接口")
+    @ApiOperation(value = "分页查询文章接口(前后台)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
@@ -77,7 +77,7 @@ public class NewsController {
      * @return
      */
     @PutMapping
-    @ApiOperation(value = "修改文章接口")
+    @ApiOperation(value = "修改文章接口(后台)")
     public Response<String> update(@RequestBody NewsDto newsDto){
         log.info(newsDto.toString());
         newsService.updateNews(newsDto);
@@ -90,7 +90,7 @@ public class NewsController {
      * @return
      */
     @GetMapping("/{id}")
-    @ApiOperation(value = "查询文章接口(id)回显，或用户前台查看详细内容")
+    @ApiOperation(value = "查询文章接口(id)回显，或用户前台查看详细内容(前后台)")
     public Response<NewsDto> getById(@PathVariable Long id){
         log.info("根据id查询文章...");
         NewsDto news = newsService.selectNewsById(id);
@@ -105,7 +105,7 @@ public class NewsController {
      * @return
      */
     @GetMapping("/hotNews")
-    @ApiOperation(value = "查询热点文章(前十)")
+    @ApiOperation(value = "查询热点文章(前十)(前台)")
     public Response<ArrayList<NewsDto>> getNewsLikeCount(){
         ArrayList<NewsDto> list = newsService.queryHotNews();
         return Response.success(list);

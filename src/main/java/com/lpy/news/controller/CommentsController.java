@@ -28,7 +28,7 @@ public class CommentsController {
      * @return
      */
     @PostMapping
-    @ApiOperation(value = "新增评论接口")
+    @ApiOperation(value = "新增评论接口(前台)")
     public Response<String> save(@RequestBody CommentsDto commentsDto, HttpServletRequest request){
         log.info(commentsDto.toString());
         commentsDto.setUserId(Long.valueOf(JwtUtils.getUserId(request.getHeader("token"))));
@@ -43,7 +43,7 @@ public class CommentsController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询评论接口")
+    @ApiOperation(value = "分页查询评论接口(前后台)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
@@ -61,7 +61,7 @@ public class CommentsController {
      * @return
      */
     @PutMapping("/del")
-    @ApiOperation(value = "删除评论接口")
+    @ApiOperation(value = "删除评论接口(前后台)")
     public Response<String> delete(@RequestParam Long[] ids){
         log.info("ids:{}",ids);
         commentsService.removeComments(ids);
@@ -74,7 +74,7 @@ public class CommentsController {
      * @return
      */
     @PutMapping
-    @ApiOperation(value = "评论审核接口")
+    @ApiOperation(value = "评论审核接口(后台)")
     public Response<String> update(@RequestBody CommentsDto commentsDto){
         log.info(commentsDto.toString());
         commentsService.updateComments(commentsDto);

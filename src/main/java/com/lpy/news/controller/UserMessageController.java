@@ -29,7 +29,7 @@ public class UserMessageController {
      * @return
      */
     @GetMapping("/query")
-    @ApiOperation(value = "展示用户消息接口")
+    @ApiOperation(value = "展示用户消息接口(前台)")
     public Response<ArrayList<UserMessageDto>> queryAllMessage(HttpServletRequest request){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
         ArrayList<UserMessageDto> userMessageDtoArrayList = userMessageService.queryAllMessage(userId);
@@ -41,7 +41,7 @@ public class UserMessageController {
      * @param ids
      * @return
      */
-    @PutMapping("/del")
+    @PutMapping("/del(前台)")
     @ApiOperation(value = "删除用户消息接口")
     public Response<String> delete(@RequestParam Long[] ids){
         log.info("ids:{}",ids);

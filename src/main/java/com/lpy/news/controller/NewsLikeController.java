@@ -30,7 +30,7 @@ public class NewsLikeController {
      * @return
      */
     @PostMapping("/add")
-    @ApiOperation(value = "点赞接口")
+    @ApiOperation(value = "点赞接口(前台)")
     public Response<String> like(HttpServletRequest request,@RequestParam Long newsId){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
         //判断是否是第一次点赞
@@ -48,7 +48,7 @@ public class NewsLikeController {
      * @return
      */
     @PostMapping("/sub")
-    @ApiOperation(value = "取消点赞接口")
+    @ApiOperation(value = "取消点赞接口(前台)")
     public Response<String> nolike(HttpServletRequest request,@RequestParam Long newsId){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
         String id = newsId+"::"+userId;

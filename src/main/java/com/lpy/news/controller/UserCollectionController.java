@@ -31,7 +31,7 @@ public class UserCollectionController {
      * @return
      */
     @PostMapping("/add")
-    @ApiOperation(value = "用户添加收藏接口")
+    @ApiOperation(value = "用户添加收藏接口(前台)")
     public Response<String> add(@RequestBody UserCollectionDto userCollectionDto, HttpServletRequest request){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
         userCollectionDto.setUserId(userId);
@@ -40,7 +40,7 @@ public class UserCollectionController {
     }
 
     @PostMapping("/del")
-    @ApiOperation(value = "用户删除收藏接口")
+    @ApiOperation(value = "用户删除收藏接口(前台)")
     public Response<String> del(@RequestParam Long[] ids, HttpServletRequest request){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
         userCollectionService.delCollection(ids,userId);
@@ -54,7 +54,7 @@ public class UserCollectionController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询收藏接口")
+    @ApiOperation(value = "分页查询收藏接口(前台)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),

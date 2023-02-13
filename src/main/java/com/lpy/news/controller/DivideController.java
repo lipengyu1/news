@@ -25,7 +25,7 @@ public class DivideController {
      * @return
      */
     @PostMapping
-    @ApiOperation(value = "新增分类接口")
+    @ApiOperation(value = "新增分类接口(后台)")
     public Response<String> save(@RequestBody Divide divide){
         log.info(divide.toString());
         divideService.saveDivide(divide);
@@ -38,7 +38,7 @@ public class DivideController {
      * @return
      */
     @PutMapping("/del")
-    @ApiOperation(value = "删除分类接口")
+    @ApiOperation(value = "删除分类接口(后台)")
     public Response<String> delete(@RequestParam Long[] ids){
         log.info("ids:{}",ids);
         divideService.removeDivide(ids);
@@ -53,7 +53,7 @@ public class DivideController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询分类接口")
+    @ApiOperation(value = "分页查询分类接口(后台)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
@@ -71,7 +71,7 @@ public class DivideController {
      * @return
      */
     @PutMapping
-    @ApiOperation(value = "修改分类接口")
+    @ApiOperation(value = "修改分类接口(后台)")
     public Response<String> update(@RequestBody Divide divide){
         log.info(divide.toString());
         divideService.updateDivide(divide);
@@ -84,7 +84,7 @@ public class DivideController {
      * @return
      */
     @GetMapping("/{id}")
-    @ApiOperation(value = "查询分类接口(id)")
+    @ApiOperation(value = "查询分类接口(id)(后台)")
     public Response<Divide> getById(@PathVariable Long id){
         log.info("根据id查询分类...");
         Divide divide = divideService.selectDivideById(id);

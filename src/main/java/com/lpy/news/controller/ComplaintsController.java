@@ -29,7 +29,7 @@ public class ComplaintsController {
      * @return
      */
     @PostMapping
-    @ApiOperation(value = "新增投诉接口")
+    @ApiOperation(value = "新增投诉接口(前台)")
     public Response<String> save(@RequestBody ComplaintsDto complaintsDto, HttpServletRequest request){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
         log.info(complaintsDto.toString());
@@ -44,7 +44,7 @@ public class ComplaintsController {
      * @return
      */
     @PutMapping("/del")
-    @ApiOperation(value = "删除投诉接口")
+    @ApiOperation(value = "删除投诉接口(后台)")
     public Response<String> delete(@RequestParam Long[] ids){
         log.info("ids:{}",ids);
         complaintsService.removeComplaints(ids);
@@ -59,7 +59,7 @@ public class ComplaintsController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询投诉接口")
+    @ApiOperation(value = "分页查询投诉接口(后台)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),

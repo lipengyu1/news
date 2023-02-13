@@ -170,7 +170,7 @@ public class EmployeeController {
      * @return
      */
     @GetMapping("/{id}")
-    @ApiOperation(value = "员工查询接口(id)")
+    @ApiOperation(value = "员工查询接口(id)(后台)")
     public Response<Employee> getById(@PathVariable Long id) {
         log.info("根据id查询员工信息...");
         Employee employee = employeeService.selectEmpById(id);
@@ -189,7 +189,7 @@ public class EmployeeController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询员工接口")
+    @ApiOperation(value = "分页查询员工接口(前后台)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
@@ -207,7 +207,7 @@ public class EmployeeController {
      * @return
      */
     @PutMapping
-    @ApiOperation(value = "员工信息修改接口")
+    @ApiOperation(value = "员工信息修改接口(后台)")
     public Response<String> update(@RequestBody Employee employee) {
         log.info(employee.toString());
         employeeService.updateEmp(employee);
@@ -222,7 +222,7 @@ public class EmployeeController {
      * @return
      */
     @PutMapping("/del")
-    @ApiOperation(value = "删除接口")
+    @ApiOperation(value = "删除接口(后台)")
     public Response<String> delete(@RequestParam Long[] ids) {
         log.info("ids:{}", ids);
         employeeService.removeEmp(ids);
