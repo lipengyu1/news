@@ -18,4 +18,8 @@ public interface NewsService {
     NewsDto selectNewsById(Long id);
 
     ArrayList<NewsDto> queryHotNews();
+
+    ArrayList<NewsDto> queryNews(String keyWords);
+
+    ArrayList queryHistoryKeyWords();
 }

@@ -112,4 +112,15 @@ public class NewsServiceImpl implements NewsService {
         }
         return arrayList;
     }
+
+    @Override
+    public ArrayList<NewsDto> queryNews(String keyWords) {
+        ArrayList<NewsDto> arrayList = newsDao.queryNews(keyWords);
+        return arrayList;
+    }
+
+    @Override
+    public ArrayList queryHistoryKeyWords() {
+        return null;
+    }
 }

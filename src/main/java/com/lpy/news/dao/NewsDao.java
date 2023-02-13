@@ -4,6 +4,7 @@ import com.lpy.news.dto.NewsDto;
 import com.lpy.news.entity.Divide;
 import com.lpy.news.entity.NewsDivide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface NewsDao {
@@ -20,4 +21,5 @@ public interface NewsDao {
 
     NewsDto selectNewsById(Long id);
 
+    ArrayList<NewsDto> queryNews(String keyWords);
 }

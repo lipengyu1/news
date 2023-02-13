@@ -2,9 +2,9 @@ package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.NewsDto;
-import com.lpy.news.entity.News;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.NewsServiceImpl;
+import com.lpy.news.utils.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -13,9 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -108,6 +107,32 @@ public class NewsController {
     @ApiOperation(value = "查询热点文章(前十)(前台)")
     public Response<ArrayList<NewsDto>> getNewsLikeCount(){
         ArrayList<NewsDto> list = newsService.queryHotNews();
+        return Response.success(list);
+    }
+
+    /**
+     * 搜索框查询文章
+     * @return
+     */
+    @GetMapping("/querynews")
+    @ApiOperation(value = "搜索框查询文章(前台)")
+    public Response<ArrayList> queryNews(@RequestParam String KeyWords,HttpServletRequest request){
+        Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
+        ArrayList<NewsDto> list = newsService.queryNews(KeyWords);
+        return Response.success(list);
+    }
+
+
+    /**
+     * 查询用户搜索历史关键字
+     * @return
+     */
+    @GetMapping("/hiskeywds")
+    @ApiOperation(value = "查询用户搜索历史关键字(前台)")
+    public Response<ArrayList> queryHisKeyWds(HttpServletRequest request){
+        Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
+
+        ArrayList list = newsService.queryHistoryKeyWords();
         return Response.success(list);
     }
 }

@@ -47,4 +47,8 @@
         on news.id = news_divide.news_id
         where news.id = #{id} and status = 1;
     </select>
+    <select id="queryNews" resultType="com.lpy.news.dto.NewsDto">
+        select news.id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time
+        from news where keywds like '%${keyWords}%';
+    </select>
 </mapper>
