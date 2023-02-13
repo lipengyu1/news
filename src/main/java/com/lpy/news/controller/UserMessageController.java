@@ -41,8 +41,8 @@ public class UserMessageController {
      * @param ids
      * @return
      */
-    @PutMapping("/del(前台)")
-    @ApiOperation(value = "删除用户消息接口")
+    @PutMapping("/del")
+    @ApiOperation(value = "删除用户消息接口(前台)")
     public Response<String> delete(@RequestParam Long[] ids){
         log.info("ids:{}",ids);
         userMessageService.removeMessage(ids);
