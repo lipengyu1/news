@@ -1,21 +1,21 @@
 package com.lpy.news.service.impl;
 
 import com.lpy.news.entity.NewsLike;
-import com.lpy.news.entity.NewsLikeCount;
 import com.lpy.news.service.RedisService;
+import com.lpy.news.service.SnowService;
 import com.lpy.news.utils.LikedStatusEnum;
 import com.lpy.news.utils.RedisKeyUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.Cursor;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ScanOptions;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 
 @Service
 @Slf4j
@@ -67,6 +67,23 @@ public class RedisServiceImpl implements RedisService {
             redisTemplate.opsForHash().delete(RedisKeyUtils.MAP_USER_LIKED, key);
         }
         return list;
+    }
+
+    @Override
+    public void saveUserQuery(String keyWords, Long userId) {
+        redisTemplate.opsForList().leftPush(userId, keyWords);
+        Long size = redisTemplate.opsForList().size(userId);
+        //允许存储100个用户的输入，超过后自动pop
+        if (size > 100) {
+            redisTemplate.opsForList().rightPop(userId);
+        }
+    }
+
+    @Override
+    public List getUserQuery(Long userId) {
+        List list = redisTemplate.opsForList().range(userId,0,-1);
+        System.out.println(redisTemplate.opsForList().range(userId,0,-1));
+        return list ;
     }
 }
 

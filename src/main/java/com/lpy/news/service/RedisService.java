@@ -1,8 +1,8 @@
 package com.lpy.news.service;
 
 import com.lpy.news.entity.NewsLike;
-import com.lpy.news.entity.NewsLikeCount;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface RedisService {
@@ -27,4 +27,12 @@ public interface RedisService {
      * @return
      */
     List<NewsLike> getLikedDataFromRedis();
+    /**
+     * 用户搜索记录保存至redis
+     */
+    void saveUserQuery(String KeyWords,Long userId);
+    /**
+     * 查询用户输入记录
+     */
+    List getUserQuery(Long userId);
 }
