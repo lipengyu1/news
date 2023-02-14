@@ -21,5 +21,4 @@ public interface NewsService {
 
     ArrayList<NewsDto> queryNews(String keyWords);
 
-    ArrayList queryHistoryKeyWords();
 }
