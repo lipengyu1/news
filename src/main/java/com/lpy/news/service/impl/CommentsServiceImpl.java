@@ -32,21 +32,22 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public BasePageResponse<CommentsDto> queryCommentsPage(int pageNo, int pageSize, String state) {
-        Integer stateNum;
-        if (state.equals("")||state.equals(null)){
-            stateNum = null;
-        }else if (state.equals("拒绝")) {
-            stateNum = 0;
-        }else if (state.equals("通过")){
-            stateNum = 1;
+    public BasePageResponse<CommentsDto> queryCommentsPage(int pageNo, int pageSize, String stateNum) {
+        Integer state;
+        if (stateNum.equals("")||stateNum.equals(null)){
+            state = null;
+        }else if (stateNum.equals("拒绝")) {
+            state = 0;
+        }else if (stateNum.equals("通过")){
+            state = 1;
         }else {
             throw new CustomException("审核状态异常");
         }
+        System.out.println(stateNum);
         int pageNo1 = pageSize * (pageNo - 1);
-        List<CommentsDto> queryList = commentsDao.queryCommentsPage(pageNo1,pageSize,stateNum);
+        List<CommentsDto> queryList = commentsDao.queryCommentsPage(pageNo1,pageSize,state);
         ArrayList<CommentsDto> arrayList = new ArrayList<>(queryList);
-        int totalCount = commentsDao.queryCommentsCount(pageNo1,pageSize,stateNum);
+        int totalCount = commentsDao.queryCommentsCount(pageNo1,pageSize,state);
         BasePageResponse<CommentsDto> basePageResponse = new BasePageResponse<>();
         basePageResponse.setPageNo(pageNo);
         basePageResponse.setPageSize(pageSize);

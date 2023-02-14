@@ -9,8 +9,8 @@
         select id,user_id,news_id,comments_content,comments_time,state from comments
         <where>
             status = 1
-            <if test="stateNum != null and stateNum!= ''" >
-                and state = #{stateNum}
+            <if test="state != null" >
+                and state = #{state}
             </if>
         </where>
         order by id  limit ${pageNo}, ${pageSize};
@@ -19,8 +19,8 @@
         select count(*) from comments
         <where>
             status = 1
-            <if test="stateNum != null and stateNum!= ''" >
-                and state = #{stateNum}
+            <if test="state != null" >
+                and state = #{state}
             </if>
         </where>
     </select>

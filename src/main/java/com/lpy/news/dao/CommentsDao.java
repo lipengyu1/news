@@ -7,9 +7,9 @@ import java.util.List;
 public interface CommentsDao {
     void saveComments(CommentsDto commentsDto);
 
-    List<CommentsDto> queryCommentsPage(int pageNo, int pageSize, Integer stateNum);
+    List<CommentsDto> queryCommentsPage(int pageNo, int pageSize, Integer state);
 
-    int queryCommentsCount(int pageNo, int pageSize, Integer stateNum);
+    int queryCommentsCount(int pageNo, int pageSize, Integer state);
 
     void removeComments(Long id);
 
