@@ -11,10 +11,12 @@ import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -71,7 +73,9 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public void saveUserQuery(String keyWords, Long userId) {
-        redisTemplate.opsForList().leftPush(userId, keyWords);
+        //设置特殊key
+        String key = userId+"keywords";
+        redisTemplate.opsForList().leftPush(key, keyWords);
         Long size = redisTemplate.opsForList().size(userId);
         //允许存储100个用户的输入，超过后自动pop
         if (size > 100) {
@@ -81,9 +85,30 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public List getUserQuery(Long userId) {
-        List list = redisTemplate.opsForList().range(userId,0,-1);
-        System.out.println(redisTemplate.opsForList().range(userId,0,-1));
+        String key = userId+"keywords";
+        List list = redisTemplate.opsForList().range(key,0,-1);
         return list ;
+    }
+
+    @Override
+    public void saveHistory(Long userId, LocalDateTime date, Long id) {
+        String key = userId+"history";//userId-用户id(key),id-文章id(hashkey)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String datetime = date.format(formatter);//datetime-阅读时间(value)
+        redisTemplate.opsForHash().put(key,id,datetime);
+    }
+
+    @Override
+    public void delHistory(Long userId, Long newsId) {
+        String key = userId+"history";
+        redisTemplate.opsForHash().delete(key,newsId);
+    }
+
+    @Override
+    public Map queryHistory(Long userId) {
+        String key = userId+"history";
+        Map map = redisTemplate.opsForHash().entries(key);
+        return map;
     }
 }
 

@@ -2,8 +2,10 @@ package com.lpy.news.service;
 
 import com.lpy.news.entity.NewsLike;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface RedisService {
     /**
@@ -35,4 +37,17 @@ public interface RedisService {
      * 查询用户输入记录
      */
     List getUserQuery(Long userId);
+    /**
+     * 保存用户浏览记录
+     */
+    void saveHistory(Long userId, LocalDateTime date, Long id);
+    /**
+     *删除用户历史记录
+     */
+    void delHistory(Long userId, Long newsId);
+
+    /**
+     *查询用户历史记录
+     */
+    Map queryHistory(Long userId);
 }

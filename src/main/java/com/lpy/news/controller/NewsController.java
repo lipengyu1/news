@@ -3,6 +3,7 @@ package com.lpy.news.controller;
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.NewsDto;
 import com.lpy.news.model.Response;
+import com.lpy.news.service.impl.HistoryServiceImpl;
 import com.lpy.news.service.impl.NewsServiceImpl;
 import com.lpy.news.service.impl.RedisServiceImpl;
 import com.lpy.news.utils.JwtUtils;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,8 @@ public class NewsController {
     private NewsServiceImpl newsService;
     @Autowired
     private RedisServiceImpl redisService;
+    @Autowired
+    private HistoryServiceImpl historyService;
 
     /**
      * 新增文章(待修改，当前只能添加一个分类)
@@ -70,6 +74,7 @@ public class NewsController {
     })
     public Response<BasePageResponse<NewsDto>> page(int pageNo, int pageSize, String divideName,String author){
         log.info("pageNo={},pageSize={},divideName={},author={}",pageNo,pageSize,divideName,author);
+//        (divideName,likeCount未添加)
         BasePageResponse<NewsDto> response = newsService.queryNewsPage(pageNo,pageSize,divideName,author);
         return Response.success(response);
     }
@@ -109,15 +114,15 @@ public class NewsController {
      * @return
      */
     @GetMapping("/a/{id}")
-    @ApiOperation(value = "查询文章详细内容并保存浏览记录(前台)")
-    public Response<NewsDto> queryNewsById(@PathVariable Long id){
+    @ApiOperation(value = "查询文章详细内容并保存浏览记录(前台)(可用于首页查看文章、历史记录中查看文章)")
+    public Response<NewsDto> queryNewsById(@PathVariable Long id,HttpServletRequest request){
         log.info("根据id查询文章...");
         NewsDto news = newsService.selectNewsById(id);
-//        调用保存历史记录接口，将历史记录保存到redis
-
-
-
         if (news != null){
+            Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
+            LocalDateTime date = LocalDateTime.now();
+            //调用保存历史记录接口，将历史记录保存到redis
+            historyService.saveHistory(userId,date,id);
             return Response.success(news);
         }
         return Response.error("未查询到文章");
@@ -143,13 +148,12 @@ public class NewsController {
     @ApiOperation(value = "搜索框查询文章(前台)")
     public Response<ArrayList> queryNews(@RequestParam String keyWords,HttpServletRequest request){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
-        //文章查询
+        //文章查询(divideName,likeCount未添加)
         ArrayList<NewsDto> list = newsService.queryNews(keyWords);
         //用户搜索记录保存
         redisService.saveUserQuery(keyWords,userId);
         return Response.success(list);
     }
-
 
     /**
      * 查询用户搜索历史关键字
