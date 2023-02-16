@@ -75,7 +75,6 @@ public class NewsController {
     })
     public Response<BasePageResponse<NewsDto>> page(int pageNo, int pageSize, String divideName,String author){
         log.info("pageNo={},pageSize={},divideName={},author={}",pageNo,pageSize,divideName,author);
-//        (likeCount未添加)
         BasePageResponse<NewsDto> response = newsService.queryNewsPage(pageNo,pageSize,divideName,author);
         return Response.success(response);
     }
