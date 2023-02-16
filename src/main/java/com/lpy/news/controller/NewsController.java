@@ -2,6 +2,7 @@ package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.NewsDto;
+import com.lpy.news.dto.NewsKeyQueryDto;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.HistoryServiceImpl;
 import com.lpy.news.service.impl.NewsServiceImpl;
@@ -74,7 +75,7 @@ public class NewsController {
     })
     public Response<BasePageResponse<NewsDto>> page(int pageNo, int pageSize, String divideName,String author){
         log.info("pageNo={},pageSize={},divideName={},author={}",pageNo,pageSize,divideName,author);
-//        (divideName,likeCount未添加)
+//        (likeCount未添加)
         BasePageResponse<NewsDto> response = newsService.queryNewsPage(pageNo,pageSize,divideName,author);
         return Response.success(response);
     }
@@ -148,8 +149,7 @@ public class NewsController {
     @ApiOperation(value = "搜索框查询文章(前台)")
     public Response<ArrayList> queryNews(@RequestParam String keyWords,HttpServletRequest request){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
-        //文章查询(divideName,likeCount未添加)
-        ArrayList<NewsDto> list = newsService.queryNews(keyWords);
+        ArrayList<NewsKeyQueryDto> list = newsService.queryNews(keyWords);
         //用户搜索记录保存
         redisService.saveUserQuery(keyWords,userId);
         return Response.success(list);

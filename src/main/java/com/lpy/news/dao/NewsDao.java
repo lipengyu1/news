@@ -1,6 +1,7 @@
 package com.lpy.news.dao;
 
 import com.lpy.news.dto.NewsDto;
+import com.lpy.news.dto.NewsKeyQueryDto;
 import com.lpy.news.entity.Divide;
 import com.lpy.news.entity.NewsDivide;
 
@@ -21,5 +22,5 @@ public interface NewsDao {
 
     NewsDto selectNewsById(Long id);
 
-    ArrayList<NewsDto> queryNews(String keyWords);
+    ArrayList<NewsKeyQueryDto> queryNews(String keyWords);
 }

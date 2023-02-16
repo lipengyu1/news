@@ -7,6 +7,7 @@ import com.lpy.news.dao.NewsDao;
 import com.lpy.news.dao.NewsDivideDao;
 import com.lpy.news.dao.NewsLikeDao;
 import com.lpy.news.dto.NewsDto;
+import com.lpy.news.dto.NewsKeyQueryDto;
 import com.lpy.news.entity.NewsDivide;
 import com.lpy.news.entity.NewsLikeCountDB;
 import com.lpy.news.service.NewsService;
@@ -64,6 +65,11 @@ public class NewsServiceImpl implements NewsService {
     public BasePageResponse<NewsDto> queryNewsPage(int pageNo, int pageSize, String divideName,String author) {
         int pageNo1 = pageSize * (pageNo - 1);
         List<NewsDto> queryList = newsDao.queryNewsPage(pageNo1,pageSize,divideName,author);
+        //添加点赞统计
+        for (NewsDto newsDto : queryList) {
+            Integer num = newsLikeDao.selectNewsCountLike(newsDto.getId());
+            newsDto.setLikeCount(num);
+        }
         ArrayList<NewsDto> arrayList = new ArrayList(queryList);
         int totalCount = newsDao.queryNewsCount(pageNo1,pageSize,divideName,author);
         BasePageResponse<NewsDto> basePageResponse = new BasePageResponse<>();
@@ -114,8 +120,12 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public ArrayList<NewsDto> queryNews(String keyWords) {
-        ArrayList<NewsDto> arrayList = newsDao.queryNews(keyWords);
+    public ArrayList<NewsKeyQueryDto> queryNews(String keyWords) {
+        ArrayList<NewsKeyQueryDto> arrayList = newsDao.queryNews(keyWords);
+        for (NewsKeyQueryDto newsKeyQueryDto : arrayList) {
+            Integer num = newsLikeDao.selectNewsCountLike(newsKeyQueryDto.getId());
+            newsKeyQueryDto.setLikeCount(num);
+        }
         return arrayList;
     }
 }

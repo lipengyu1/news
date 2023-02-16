@@ -2,6 +2,7 @@ package com.lpy.news.service;
 
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.NewsDto;
+import com.lpy.news.dto.NewsKeyQueryDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,6 @@ public interface NewsService {
 
     ArrayList<NewsDto> queryHotNews();
 
-    ArrayList<NewsDto> queryNews(String keyWords);
+    ArrayList<NewsKeyQueryDto> queryNews(String keyWords);
 
 }
