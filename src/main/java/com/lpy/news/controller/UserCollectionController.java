@@ -1,9 +1,7 @@
 package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
-import com.lpy.news.dto.NewsDto;
 import com.lpy.news.dto.UserCollectionDto;
-import com.lpy.news.entity.UserCollection;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.UserCollectionServiceImpl;
 import com.lpy.news.utils.JwtUtils;

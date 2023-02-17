@@ -62,7 +62,6 @@ public class HistoryServiceImpl implements HistoryService {
             //根据map中的key获取value阅读时间
             String time = (String) map.get(o);
             newsUserHistoryDto.setReadTime(time);
-            System.out.println(newsUserHistoryDto);
             arrayList.add(newsUserHistoryDto);
         }
         return arrayList;

@@ -2,9 +2,7 @@ package com.lpy.news.service.impl;
 
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dao.UserCollectionDao;
-import com.lpy.news.dto.ComplaintsDto;
 import com.lpy.news.dto.UserCollectionDto;
-import com.lpy.news.entity.UserCollection;
 import com.lpy.news.service.SnowService;
 import com.lpy.news.service.UserCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;

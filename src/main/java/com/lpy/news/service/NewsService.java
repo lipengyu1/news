@@ -5,7 +5,6 @@ import com.lpy.news.dto.NewsDto;
 import com.lpy.news.dto.NewsKeyQueryDto;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface NewsService {
     void saveNews(NewsDto newsDto);

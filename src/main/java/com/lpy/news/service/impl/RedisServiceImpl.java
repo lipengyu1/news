@@ -2,7 +2,6 @@ package com.lpy.news.service.impl;
 
 import com.lpy.news.entity.NewsLike;
 import com.lpy.news.service.RedisService;
-import com.lpy.news.service.SnowService;
 import com.lpy.news.utils.LikedStatusEnum;
 import com.lpy.news.utils.RedisKeyUtils;
 import lombok.extern.slf4j.Slf4j;

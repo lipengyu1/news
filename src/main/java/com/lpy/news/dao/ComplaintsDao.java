@@ -2,7 +2,6 @@ package com.lpy.news.dao;
 
 import com.lpy.news.dto.ComplaintsDto;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ComplaintsDao {

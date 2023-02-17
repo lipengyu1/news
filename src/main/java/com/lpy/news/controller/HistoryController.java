@@ -1,13 +1,9 @@
 package com.lpy.news.controller;
 
-
-import com.lpy.news.dto.NewsDto;
 import com.lpy.news.dto.NewsUserHistoryDto;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.HistoryServiceImpl;
-import com.lpy.news.service.impl.RedisServiceImpl;
 import com.lpy.news.utils.JwtUtils;
-import com.lpy.news.utils.RedisKeyUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 
 @Slf4j
 @RestController
@@ -43,6 +38,5 @@ public class HistoryController {
     Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
     ArrayList<NewsUserHistoryDto> arrayList = historyService.queryHistory(userId,newsId);
     return Response.success(arrayList);
-}
-
+    }
 }
