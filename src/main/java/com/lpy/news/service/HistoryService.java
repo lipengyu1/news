@@ -10,5 +10,5 @@ public interface HistoryService {
 
     void delHistory(Long userId, Long newsId);
 
-    ArrayList<NewsUserHistoryDto> queryHistory(Long userId, Long newsId);
+    ArrayList<NewsUserHistoryDto> queryHistory(Long userId);
 }

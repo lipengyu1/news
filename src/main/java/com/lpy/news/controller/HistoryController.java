@@ -31,12 +31,12 @@ public class HistoryController {
         return Response.success("删除成功");
     }
 
-//    查询历史浏览记录（根据redis中的newsId查询详细文章信息）
+//    查询历史浏览记录（根据redis中的newsId查询文章信息）
     @GetMapping("/gethistory")
     @ApiOperation(value = "用户查询历史记录(前台)")
-    public Response<ArrayList<NewsUserHistoryDto>> queryHistory(HttpServletRequest request, @RequestParam Long newsId){
+    public Response<ArrayList<NewsUserHistoryDto>> queryHistory(HttpServletRequest request){
     Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
-    ArrayList<NewsUserHistoryDto> arrayList = historyService.queryHistory(userId,newsId);
+    ArrayList<NewsUserHistoryDto> arrayList = historyService.queryHistory(userId);
     return Response.success(arrayList);
     }
 }

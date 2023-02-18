@@ -39,7 +39,7 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
-    public ArrayList<NewsUserHistoryDto> queryHistory(Long userId, Long newsId) {
+    public ArrayList<NewsUserHistoryDto> queryHistory(Long userId) {
         //获取用户浏览记录
         Map map = redisService.queryHistory(userId);
         //取出key
