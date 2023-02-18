@@ -30,7 +30,9 @@ public class UserCollectionController {
      * @return
      */
     @PostMapping("/add")
-    @ApiOperation(value = "用户添加收藏接口(前台)")
+    @ApiOperation(value = "用户添加收藏接口(前台)请求示例{\n" +
+            "    \"newsId\":\"215577361272407041\"\n" +
+            "}")
     public Response<String> add(@RequestBody UserCollection userCollection, HttpServletRequest request){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
         userCollection.setUserId(userId);
