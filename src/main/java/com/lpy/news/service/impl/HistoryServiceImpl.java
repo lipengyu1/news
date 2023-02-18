@@ -55,6 +55,9 @@ public class HistoryServiceImpl implements HistoryService {
             newsUserHistoryDto.setDivideName(newsDto.getDivideName());
             newsUserHistoryDto.setTitle(newsDto.getTitle());
             newsUserHistoryDto.setId(newsDto.getId());
+            newsUserHistoryDto.setPicture1(newsDto.getPicture1());
+            newsUserHistoryDto.setPicture2(newsDto.getPicture2());
+            newsUserHistoryDto.setPicture3(newsDto.getPicture3());
             newsUserHistoryDto.setKeywds(newsDto.getKeywds());
             newsUserHistoryDto.setPublishHouse(newsDto.getPublishHouse());
             newsUserHistoryDto.setDivideName(newsDto.getDivideName());
