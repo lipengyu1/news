@@ -16,10 +16,6 @@ public class UserCollection {
      */
     private Long newsId;
     /**
-     * 标题
-     */
-    private String newsTitle;
-    /**
      * 创建时间
      */
     private LocalDateTime createTime;

@@ -2,6 +2,7 @@ package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.UserCollectionDto;
+import com.lpy.news.entity.UserCollection;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.UserCollectionServiceImpl;
 import com.lpy.news.utils.JwtUtils;
@@ -30,10 +31,10 @@ public class UserCollectionController {
      */
     @PostMapping("/add")
     @ApiOperation(value = "用户添加收藏接口(前台)")
-    public Response<String> add(@RequestBody UserCollectionDto userCollectionDto, HttpServletRequest request){
+    public Response<String> add(@RequestBody UserCollection userCollection, HttpServletRequest request){
         Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
-        userCollectionDto.setUserId(userId);
-        userCollectionService.addCollection(userCollectionDto);
+        userCollection.setUserId(userId);
+        userCollectionService.addCollection(userCollection);
         return Response.success("收藏成功");
     }
 
