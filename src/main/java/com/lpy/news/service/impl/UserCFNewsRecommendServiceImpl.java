@@ -5,7 +5,6 @@ import com.lpy.news.dao.NewsLikeDao;
 import com.lpy.news.dao.UserDao;
 import com.lpy.news.dto.NewsUserRecommendDto;
 import com.lpy.news.service.UserCFNewsRecommendSerevice;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,14 +51,14 @@ public class UserCFNewsRecommendServiceImpl implements UserCFNewsRecommendSerevi
             userID.put(user,i);
             idUser.put(i,user);
 
-            //建立物品--用户倒排表
+            //建立文章--用户倒排表
             for(int j=0;j<itemlist.size();j++){
                Long topic=itemlist.get(j);
-                if(items.contains(topic)){//如果已经包含对应的物品--用户映射，直接添加对应的用户
+                if(items.contains(topic)){//如果已经包含对应的文章--用户映射，直接添加对应的用户
                     itemUserCollection.get(topic).add(user);
-                }else{//否则创建对应物品--用户集合映射
+                }else{//否则创建对应文章--用户集合映射
                     items.add(topic);
-                    //创建物品--用户倒排关系
+                    //创建文章--用户倒排关系
                     itemUserCollection.put(topic,new HashSet<Long>());
                     itemUserCollection.get(topic).add(user);
                 }
@@ -78,7 +77,7 @@ public class UserCFNewsRecommendServiceImpl implements UserCFNewsRecommendSerevi
                     if(user_u==user_v){
                         continue;
                     }
-                    //计算用户u与用户v都有正反馈的物品总数
+                    //计算用户u与用户v都有正反馈的文章总数
                     sparseMatrix[userID.get(user_u)][userID.get(user_v)]+=1;
                 }
             }
@@ -91,12 +90,12 @@ public class UserCFNewsRecommendServiceImpl implements UserCFNewsRecommendSerevi
                         +sparseMatrix[recommendUserId][j]/Math.sqrt(userItemLength.get(idUser.get(recommendUserId))*userItemLength.get(idUser.get(j))));
             }
         }
-        //计算指定用户recommendUser的物品推荐度
+        //计算指定用户recommendUser的文章推荐度
         Map<Long,Double> itemRecommendDegree=new HashMap<>();//topic->推荐度
-        for(Long item:items){//遍历每一件物品
-            //得到购买当前物品的所有用户集合
+        for(Long item:items){//遍历每一文章
+            //得到查阅当前文章的所有用户集合
             Set<Long> users=itemUserCollection.get(item);
-            //如果被推荐用户没有购买当前物品，则进行推荐度计算
+            //如果被推荐用户没有阅读当前文章，则进行推荐度计算
             if(!users.contains(userId)){
                 double RecommendDegree = 0.0;
                 for(Long user:users){

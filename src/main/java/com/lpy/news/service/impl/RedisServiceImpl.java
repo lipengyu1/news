@@ -1,6 +1,5 @@
 package com.lpy.news.service.impl;
 
-import com.lpy.news.dto.NewsDto;
 import com.lpy.news.dto.NewsUserHistoryDto;
 import com.lpy.news.entity.NewsLike;
 import com.lpy.news.service.RedisService;

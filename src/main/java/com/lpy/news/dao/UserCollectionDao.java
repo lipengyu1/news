@@ -1,6 +1,5 @@
 package com.lpy.news.dao;
 
-import com.lpy.news.dto.UserCollectionDto;
 import com.lpy.news.entity.UserCollection;
 
 import java.util.List;

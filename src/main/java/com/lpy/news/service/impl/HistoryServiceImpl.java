@@ -1,6 +1,5 @@
 package com.lpy.news.service.impl;
 
-import com.lpy.news.dao.DivideDao;
 import com.lpy.news.dao.NewsDao;
 import com.lpy.news.dao.NewsDivideDao;
 import com.lpy.news.dao.NewsLikeDao;
@@ -10,11 +9,8 @@ import com.lpy.news.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
