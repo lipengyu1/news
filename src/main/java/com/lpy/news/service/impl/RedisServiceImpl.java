@@ -1,5 +1,7 @@
 package com.lpy.news.service.impl;
 
+import com.lpy.news.dto.NewsDto;
+import com.lpy.news.dto.NewsUserHistoryDto;
 import com.lpy.news.entity.NewsLike;
 import com.lpy.news.service.RedisService;
 import com.lpy.news.utils.LikedStatusEnum;
@@ -12,10 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -108,6 +107,22 @@ public class RedisServiceImpl implements RedisService {
         String key = userId+"history";
         Map map = redisTemplate.opsForHash().entries(key);
         return map;
+    }
+
+    @Override
+    public List<Long> getNewsIdlistByUserId(Long user) {
+        //获取用户浏览记录
+        Map map = queryHistory(user);
+        //取出key
+        Set keyset = map.keySet();
+        List<Long> list = new ArrayList<>();
+        ArrayList<NewsUserHistoryDto> arrayList = new ArrayList<>();
+        for (Object o :keyset) {
+//            NewsUserHistoryDto newsUserHistoryDto = new NewsUserHistoryDto();
+            Long newsId = (Long) o;
+            list.add(newsId);
+        }
+        return list;
     }
 }
 

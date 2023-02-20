@@ -2,6 +2,8 @@ package com.lpy.news.dao;
 
 import com.lpy.news.dto.NewsDto;
 import com.lpy.news.dto.NewsKeyQueryDto;
+import com.lpy.news.dto.NewsUserRecommendDto;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,4 +22,9 @@ public interface NewsDao {
     NewsDto selectNewsById(Long id);
 
     ArrayList<NewsKeyQueryDto> queryNews(String keyWords);
+
+    //以下为算法使用接口
+    List<Long> getAllNewsIdList();
+
+    NewsUserRecommendDto findByTopicIdIn(Long newsId);
 }

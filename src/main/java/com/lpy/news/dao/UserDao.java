@@ -23,4 +23,7 @@ public interface UserDao {
     void removeUser(Long id);
 
     void updateUser(User user);
+
+    //以下为算法使用接口
+    List<Long> getAllUserIdList();
 }

@@ -49,4 +49,7 @@ public interface RedisService {
      *查询用户历史记录
      */
     Map queryHistory(Long userId);
+
+//    以下为算法使用接口
+    List<Long> getNewsIdlistByUserId(Long user);
 }

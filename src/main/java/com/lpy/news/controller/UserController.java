@@ -1,9 +1,11 @@
 package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
+import com.lpy.news.dto.NewsUserRecommendDto;
 import com.lpy.news.dto.UserDto;
 import com.lpy.news.entity.User;
 import com.lpy.news.model.Response;
+import com.lpy.news.service.impl.UserCFNewsRecommendServiceImpl;
 import com.lpy.news.service.impl.UserServiceImpl;
 import com.lpy.news.utils.JwtUtils;
 import com.lpy.news.utils.ValidateCodeUtils;
@@ -19,6 +21,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;

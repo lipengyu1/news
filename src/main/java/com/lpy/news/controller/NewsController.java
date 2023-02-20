@@ -1,12 +1,15 @@
 package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
+import com.lpy.news.dto.NewsAndRecommendDto;
 import com.lpy.news.dto.NewsDto;
 import com.lpy.news.dto.NewsKeyQueryDto;
+import com.lpy.news.dto.NewsUserRecommendDto;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.HistoryServiceImpl;
 import com.lpy.news.service.impl.NewsServiceImpl;
 import com.lpy.news.service.impl.RedisServiceImpl;
+import com.lpy.news.service.impl.UserCFNewsRecommendServiceImpl;
 import com.lpy.news.utils.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -32,6 +35,8 @@ public class NewsController {
     private RedisServiceImpl redisService;
     @Autowired
     private HistoryServiceImpl historyService;
+    @Autowired
+    private UserCFNewsRecommendServiceImpl userCFNewsRecommendSerevice;
 
     /**
      * 新增文章(待修改，当前只能添加一个分类)
@@ -114,16 +119,21 @@ public class NewsController {
      * @return
      */
     @GetMapping("/a/{id}")
-    @ApiOperation(value = "查询文章详细内容并保存浏览记录(前台)(可用于首页查看文章、历史记录中查看文章)")
-    public Response<NewsDto> queryNewsById(@PathVariable Long id,HttpServletRequest request){
+    @ApiOperation(value = "查询文章详细内容并保存浏览记录(前台)(可用于首页查看文章、历史记录中查看文章，同时返回推荐的新闻)")
+    public Response<NewsAndRecommendDto> queryNewsById(@PathVariable Long id, HttpServletRequest request){
         log.info("根据id查询文章...");
         NewsDto news = newsService.selectNewsById(id);
+        NewsAndRecommendDto newsAndRecommendDto = new NewsAndRecommendDto();
         if (news != null){
             Long userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
             LocalDateTime date = LocalDateTime.now();
             //调用保存历史记录接口，将历史记录保存到redis
             historyService.saveHistory(userId,date,id);
-            return Response.success(news);
+            //获取推荐新闻
+            ArrayList<NewsUserRecommendDto> arrayList = userCFNewsRecommendSerevice.RecommendTopic(userId);
+            newsAndRecommendDto.setNewsDto(news);
+            newsAndRecommendDto.setRecommendList(arrayList);
+            return Response.success(newsAndRecommendDto);
         }
         return Response.error("未查询到文章");
     }

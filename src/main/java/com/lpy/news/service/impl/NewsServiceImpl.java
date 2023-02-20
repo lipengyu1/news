@@ -101,9 +101,14 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public NewsDto selectNewsById(Long id) {
-        NewsDto newsDto = newsDao.selectNewsById(id);
-        Integer num = newsLikeDao.selectNewsCountLike(id);
-        newsDto.setLikeCount(num);
+        NewsDto newsDto = null;
+        try {
+            newsDto = newsDao.selectNewsById(id);
+            Integer num = newsLikeDao.selectNewsCountLike(id);
+            newsDto.setLikeCount(num);
+        } catch (Exception e) {
+            throw new CustomException("未查询到文章");
+        }
         return newsDto;
     }
 

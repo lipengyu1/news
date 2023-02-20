@@ -53,4 +53,13 @@
         on news.id = news_divide.news_id
         where keywds like '%${keyWords}%';
     </select>
+    <select id="getAllNewsIdList" resultType="java.lang.Long">
+        select id from news;
+    </select>
+    <select id="findByTopicIdIn" resultType="com.lpy.news.dto.NewsUserRecommendDto">
+        select news.id,title,keywds,author,picture1,picture2,picture3,publish_house,publication_time,news_divide.divide_name
+        from news
+        inner join news_divide on news.id = news_divide.news_id
+        where news.id = #{newsId};
+    </select>
 </mapper>
