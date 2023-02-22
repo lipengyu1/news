@@ -43,7 +43,7 @@ public class NewsController {
      * @return
      */
     @PostMapping
-    @ApiOperation(value = "新增分类接口(后台)")
+    @ApiOperation(value = "新增文章接口(后台)")
     public Response<String> save(@RequestBody NewsDto newsDto){
         log.info("新增文章");
         newsService.saveNews(newsDto);

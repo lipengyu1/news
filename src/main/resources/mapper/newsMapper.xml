@@ -25,7 +25,7 @@
                 and news_divide.divide_name = #{divideName}
             </if>
         </where>
-        order by id  limit ${pageNo}, ${pageSize};
+        order by create_time desc  limit ${pageNo}, ${pageSize};
     </select>
     <select id="queryNewsCount" resultType="java.lang.Integer">
         select count(*) from news
