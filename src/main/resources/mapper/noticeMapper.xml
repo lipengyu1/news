@@ -18,7 +18,7 @@
                 and create_person = #{createPerson}
             </if>
         </where>
-        order by id  limit ${pageNo}, ${pageSize};
+        order by  create_time desc limit ${pageNo}, ${pageSize};
     </select>
     <select id="queryNoticeCount" resultType="java.lang.Integer">
         select count(*) from notice

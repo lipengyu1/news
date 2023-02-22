@@ -14,7 +14,7 @@
         select id,news_id,user_id,create_time
         from user_collection
         where status = 1 and user_id = #{userId}
-        order by id  limit ${pageNo}, ${pageSize};
+        order by create_time desc  limit ${pageNo}, ${pageSize};
     </select>
     <select id="queryCollectionPageCount" resultType="java.lang.Integer">
         select count(*)
