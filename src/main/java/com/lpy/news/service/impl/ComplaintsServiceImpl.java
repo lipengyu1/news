@@ -6,6 +6,7 @@ import com.lpy.news.dto.ComplaintsDto;
 import com.lpy.news.service.ComplaintsService;
 import com.lpy.news.service.SnowService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class ComplaintsServiceImpl implements ComplaintsService {
     ComplaintsDao complaintsDao;
     SnowService snowService = new SnowService(1, 1);
 
+    @CacheEvict(value = "usermessageCache",allEntries = true)
     @Override
     public void saveComplaints(ComplaintsDto complaintsDto) {
         complaintsDto.setId(snowService.getId());

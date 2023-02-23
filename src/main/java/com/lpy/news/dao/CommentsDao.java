@@ -14,4 +14,8 @@ public interface CommentsDao {
     void removeComments(Long id);
 
     void updateComments(CommentsDto commentsDto);
+
+    List<CommentsDto> queryCommentsPageByNewsId(int pageNo, int pageSize, Long newsId);
+
+    int qqueryCommentsPageByNewsIdCount(int pageNo, int pageSize, Long newsId);
 }

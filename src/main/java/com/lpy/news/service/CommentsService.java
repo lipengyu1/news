@@ -11,4 +11,6 @@ public interface CommentsService {
     void removeComments(Long[] ids);
 
     void updateComments(CommentsDto commentsDto);
+
+    BasePageResponse<CommentsDto> queryCommentsPageByNewsId(int pageNo, int pageSize, Long newsId);
 }

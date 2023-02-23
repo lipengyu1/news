@@ -9,6 +9,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,7 @@ public class UserMessageController {
      * @param request
      * @return
      */
+    @Cacheable(value = "usermessageCache",key = "#request.getHeader('token')+'_'+'usermessage'")
     @GetMapping("/query")
     @ApiOperation(value = "展示用户消息接口(前台)")
     public Response<ArrayList<UserMessageDto>> queryAllMessage(HttpServletRequest request){
@@ -41,6 +44,7 @@ public class UserMessageController {
      * @param ids
      * @return
      */
+    @CacheEvict(value = "usermessageCache",allEntries = true)
     @PutMapping("/del")
     @ApiOperation(value = "删除用户消息接口(前台)")
     public Response<String> delete(@RequestParam Long[] ids){

@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ public class CommentsController {
      * 新增评论(用户调用)
      * @return
      */
+    @CacheEvict(value = "commentsCache",allEntries = true)
     @PostMapping
     @ApiOperation(value = "新增评论接口(前台)")
     public Response<String> save(@RequestBody CommentsDto commentsDto, HttpServletRequest request){
@@ -43,7 +46,7 @@ public class CommentsController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询评论接口(前后台)")
+    @ApiOperation(value = "分页查询评论接口(后台)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
@@ -60,6 +63,7 @@ public class CommentsController {
      * @param ids
      * @return
      */
+    @CacheEvict(value = "commentsCache",allEntries = true)
     @PutMapping("/del")
     @ApiOperation(value = "删除评论接口(前后台)")
     public Response<String> delete(@RequestParam Long[] ids){
@@ -73,6 +77,7 @@ public class CommentsController {
      * @param commentsDto
      * @return
      */
+    @CacheEvict(value = "commentsCache",allEntries = true)
     @PutMapping
     @ApiOperation(value = "评论审核接口(后台)")
     public Response<String> update(@RequestBody CommentsDto commentsDto){
@@ -81,4 +86,23 @@ public class CommentsController {
         return Response.success("评论审核成功");
     }
 
+    /**
+     * 新闻评论分页查询
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @Cacheable(value = "commentsCache",key = "#newsId+'_'+'comment'")
+    @GetMapping("/getcomment")
+    @ApiOperation(value = "用户分页查询文章相关评论接口(前台)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
+            @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
+            @ApiImplicitParam(name = "newsId",value = "新闻id",required = true),
+    })
+    public Response<BasePageResponse<CommentsDto>> getcomment(int pageNo, int pageSize,Long newsId){
+        log.info("pageNo={},pageSize={},newsId={}", pageNo, pageSize, newsId);
+        BasePageResponse<CommentsDto> response = commentsService.queryCommentsPageByNewsId(pageNo,pageSize,newsId);
+        return Response.success(response);
+    }
 }

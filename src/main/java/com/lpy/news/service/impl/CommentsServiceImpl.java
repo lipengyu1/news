@@ -7,6 +7,7 @@ import com.lpy.news.dto.CommentsDto;
 import com.lpy.news.service.CommentsService;
 import com.lpy.news.service.SnowService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -43,7 +44,6 @@ public class CommentsServiceImpl implements CommentsService {
         }else {
             throw new CustomException("审核状态异常");
         }
-        System.out.println(stateNum);
         int pageNo1 = pageSize * (pageNo - 1);
         List<CommentsDto> queryList = commentsDao.queryCommentsPage(pageNo1,pageSize,state);
         ArrayList<CommentsDto> arrayList = new ArrayList<>(queryList);
@@ -65,15 +65,31 @@ public class CommentsServiceImpl implements CommentsService {
         }
     }
 
+
+    @CacheEvict(value = "usermessageCache",allEntries = true)
     @Override
     public void updateComments(CommentsDto commentsDto) {
         Integer state = commentsDto.getState();
         commentsDao.updateComments(commentsDto);
-        System.out.println(commentsDto.getUserId());
         if (state == 1){
             userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论审核已通过");
         }else {
             userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论审核未通过");
         }
+    }
+
+    @Override
+    public BasePageResponse<CommentsDto> queryCommentsPageByNewsId(int pageNo, int pageSize, Long newsId) {
+        int pageNo1 = pageSize * (pageNo - 1);
+        List<CommentsDto> queryList = commentsDao.queryCommentsPageByNewsId(pageNo1,pageSize,newsId);
+        ArrayList<CommentsDto> arrayList = new ArrayList<>(queryList);
+        int totalCount = commentsDao.qqueryCommentsPageByNewsIdCount(pageNo1,pageSize,newsId);
+        BasePageResponse<CommentsDto> basePageResponse = new BasePageResponse<>();
+        basePageResponse.setPageNo(pageNo);
+        basePageResponse.setPageSize(pageSize);
+        basePageResponse.setTotalPage((int)Math.ceil((float)totalCount/pageSize));
+        basePageResponse.setResultList(arrayList);
+        basePageResponse.setTotalCount(totalCount);
+        return basePageResponse;
     }
 }

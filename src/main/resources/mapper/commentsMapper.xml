@@ -13,7 +13,7 @@
                 and state = #{state}
             </if>
         </where>
-        order by id  limit ${pageNo}, ${pageSize};
+        order by comments_time desc  limit ${pageNo}, ${pageSize};
     </select>
     <select id="queryCommentsCount" resultType="java.lang.Integer">
         select count(*) from comments
@@ -34,4 +34,13 @@
         set state = #{state}
         where id = #{id} and status = 1
     </update>
+    <select id="queryCommentsPageByNewsId" resultType="com.lpy.news.dto.CommentsDto">
+        select id,user_id,news_id,comments_content,comments_time,state from comments
+        where status = 1 and state = 1 and news_id = #{newsId}
+        order by comments_time desc limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="qqueryCommentsPageByNewsIdCount" resultType="java.lang.Integer">
+        select count(*) from comments
+        where status = 1 and state = 1 and news_id = #{newsId}
+    </select>
 </mapper>

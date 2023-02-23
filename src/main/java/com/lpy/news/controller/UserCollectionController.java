@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/collection")
 @Api(tags = "用户收藏接口")
 public class UserCollectionController {
-//    查询收藏
     @Autowired
     private UserCollectionServiceImpl userCollectionService;
 
@@ -29,6 +30,7 @@ public class UserCollectionController {
      * 添加收藏
      * @return
      */
+    @CacheEvict(value = "collectionCache",allEntries = true)
     @PostMapping("/add")
     @ApiOperation(value = "用户添加收藏接口(前台)请求示例{\n" +
             "    \"newsId\":\"215577361272407041\"\n" +
@@ -40,6 +42,13 @@ public class UserCollectionController {
         return Response.success("收藏成功");
     }
 
+    /**
+     * 用户删除收藏
+     * @param ids
+     * @param request
+     * @return
+     */
+    @CacheEvict(value = "collectionCache",allEntries = true)
     @PostMapping("/del")
     @ApiOperation(value = "用户删除收藏接口(前台)")
     public Response<String> del(@RequestParam Long[] ids, HttpServletRequest request){
@@ -54,6 +63,7 @@ public class UserCollectionController {
      * @param pageSize
      * @return
      */
+    @Cacheable(value = "collectionCache",key = "#request.getHeader('token')+'_'+'collection'")
     @GetMapping("/page")
     @ApiOperation(value = "分页查询收藏接口(前台)")
     @ApiImplicitParams({

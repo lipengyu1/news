@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lpy.news.dao.UserMessageDao">
     <select id="queryAllMessage" resultType="com.lpy.news.dto.UserMessageDto">
-        select message,create_time
+        select id,message,create_time
         from user_message
         where user_id = #{userId} and status = 1;
     </select>

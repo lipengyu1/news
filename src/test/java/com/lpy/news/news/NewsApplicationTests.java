@@ -32,8 +32,8 @@ public class NewsApplicationTests {
         info.put("pass", "123456");
         //生成token
 //        String id = "216328933296178177";
-//        String id = "216328933132600320";
-        String id = "216328933178737665";
+//        String id = "216328933178737665";
+        String id = "216328933132600320";
         Long userId = Long.valueOf(id);
         String token = JwtUtils.sign(userId, info);
         System.out.println(token);

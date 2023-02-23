@@ -17,6 +17,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +44,7 @@ public class NewsController {
      * 新增文章(待修改，当前只能添加一个分类)
      * @return
      */
+    @CacheEvict(value = "newsCache",allEntries = true)
     @PostMapping
     @ApiOperation(value = "新增文章接口(后台)")
     public Response<String> save(@RequestBody NewsDto newsDto){
@@ -55,6 +58,7 @@ public class NewsController {
      * @param ids
      * @return
      */
+    @CacheEvict(value = "newsCache",allEntries = true)
     @PutMapping("/del")
     @ApiOperation(value = "删除文章接口(后台)")
     public Response<String> delete(@RequestParam Long[] ids){
@@ -89,6 +93,7 @@ public class NewsController {
      * @param newsDto
      * @return
      */
+    @CacheEvict(value = "newsCache",allEntries = true)
     @PutMapping
     @ApiOperation(value = "修改文章接口(后台)")
     public Response<String> update(@RequestBody NewsDto newsDto){
@@ -118,6 +123,7 @@ public class NewsController {
      * @param id
      * @return
      */
+    @Cacheable(value = "newsCache",key = "#id+'_'+#request.getHeader('token')")
     @GetMapping("/a/{id}")
     @ApiOperation(value = "查询文章详细内容并保存浏览记录(前台)(可用于首页查看文章、历史记录中查看文章，同时返回推荐的新闻)")
     public Response<NewsAndRecommendDto> queryNewsById(@PathVariable Long id, HttpServletRequest request){
