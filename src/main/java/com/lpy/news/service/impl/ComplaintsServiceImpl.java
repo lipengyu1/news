@@ -21,7 +21,7 @@ public class ComplaintsServiceImpl implements ComplaintsService {
     ComplaintsDao complaintsDao;
     SnowService snowService = new SnowService(1, 1);
 
-    @CacheEvict(value = "usermessageCache",allEntries = true)
+//    @CacheEvict(value = "usermessageCache",allEntries = true)
     @Override
     public void saveComplaints(ComplaintsDto complaintsDto) {
         complaintsDto.setId(snowService.getId());

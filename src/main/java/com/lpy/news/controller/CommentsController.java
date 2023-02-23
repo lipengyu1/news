@@ -29,7 +29,7 @@ public class CommentsController {
      * 新增评论(用户调用)
      * @return
      */
-    @CacheEvict(value = "commentsCache",allEntries = true)
+//    @CacheEvict(value = "commentsCache",allEntries = true)
     @PostMapping
     @ApiOperation(value = "新增评论接口(前台)")
     public Response<String> save(@RequestBody CommentsDto commentsDto, HttpServletRequest request){
@@ -63,7 +63,7 @@ public class CommentsController {
      * @param ids
      * @return
      */
-    @CacheEvict(value = "commentsCache",allEntries = true)
+//    @CacheEvict(value = "commentsCache",allEntries = true)
     @PutMapping("/del")
     @ApiOperation(value = "删除评论接口(前后台)")
     public Response<String> delete(@RequestParam Long[] ids){
@@ -77,7 +77,7 @@ public class CommentsController {
      * @param commentsDto
      * @return
      */
-    @CacheEvict(value = "commentsCache",allEntries = true)
+//    @CacheEvict(value = "commentsCache",allEntries = true)
     @PutMapping
     @ApiOperation(value = "评论审核接口(后台)")
     public Response<String> update(@RequestBody CommentsDto commentsDto){
@@ -92,7 +92,7 @@ public class CommentsController {
      * @param pageSize
      * @return
      */
-    @Cacheable(value = "commentsCache",key = "#newsId+'_'+'comment'")
+//    @Cacheable(value = "commentsCache",key = "#newsId+'_'+'comment'")
     @GetMapping("/getcomment")
     @ApiOperation(value = "用户分页查询文章相关评论接口(前台)")
     @ApiImplicitParams({

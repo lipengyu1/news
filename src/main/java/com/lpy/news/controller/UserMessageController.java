@@ -30,7 +30,7 @@ public class UserMessageController {
      * @param request
      * @return
      */
-    @Cacheable(value = "usermessageCache",key = "#request.getHeader('token')+'_'+'usermessage'")
+//    @Cacheable(value = "usermessageCache",key = "#request.getHeader('token')+'_'+'usermessage'")
     @GetMapping("/query")
     @ApiOperation(value = "展示用户消息接口(前台)")
     public Response<ArrayList<UserMessageDto>> queryAllMessage(HttpServletRequest request){
@@ -44,7 +44,7 @@ public class UserMessageController {
      * @param ids
      * @return
      */
-    @CacheEvict(value = "usermessageCache",allEntries = true)
+//    @CacheEvict(value = "usermessageCache",allEntries = true)
     @PutMapping("/del")
     @ApiOperation(value = "删除用户消息接口(前台)")
     public Response<String> delete(@RequestParam Long[] ids){
