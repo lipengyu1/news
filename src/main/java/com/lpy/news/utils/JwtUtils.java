@@ -13,6 +13,7 @@ import java.util.Map;
 public class JwtUtils {
     /**
      * 过期5分钟 5 * 60 * 1000
+     * 过期60分钟 60 * 60 * 1000
      * */
     private static final long EXPIRE_TIME = 60 * 60 * 1000;
 

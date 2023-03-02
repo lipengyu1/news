@@ -53,7 +53,7 @@ public class DivideController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询分类接口(后台)")
+    @ApiOperation(value = "分页查询分类接口(前后台)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true),
