@@ -16,7 +16,7 @@
     </insert>
 
     <select id="selectNewsId" resultType="com.lpy.news.entity.NewsLikeCountDB">
-        select news_id, liked_count from news_like_count order by liked_count desc;
+        select news_id, liked_count from news_like_count order by liked_count desc limit 10;
     </select>
     <select id="selectNewsCountLike" resultType="java.lang.Integer">
         select liked_count from news_like_count where news_id = #{id};
