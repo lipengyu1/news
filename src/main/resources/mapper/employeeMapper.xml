@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lpy.news.dao.EmployeeDao">
     <select id="selectEmpById" resultType="com.lpy.news.entity.Employee">
-        select * from Employee where id = #{id} and status = 1;
+        select * from employee where id = #{id} and status = 1;
     </select>
     <select id="queryEmpPage" resultType="com.lpy.news.dto.EmployeeDto">
-        select id,name,sex,idNumber,phone,email,username,update_time,create_Time from Employee
+        select id,name,sex,idNumber,phone,email,username,update_time,create_Time from employee
         <where>
             status = 1
             <if test="name != null and name!= ''" >
@@ -15,7 +15,7 @@
         order by id  limit ${pageNo}, ${pageSize};
     </select>
     <select id="queryEmpCount" resultType="java.lang.Integer">
-        select count(*) from Employee
+        select count(*) from employee
         <where>
             status = 1
             <if test="name != null and name!= ''" >
@@ -62,6 +62,6 @@
         where email = #{email};
     </select>
     <select id="selectEmpNameById" resultType="com.lpy.news.entity.Employee">
-        select name from Employee where id = #{id} and status = 1;
+        select name from employee where id = #{id} and status = 1;
     </select>
 </mapper>

@@ -20,7 +20,7 @@ public class CommentsServiceImpl implements CommentsService {
     SnowService snowService = new SnowService(1, 1);
 
     @Autowired
-    private CommentsDao commentsDao;
+    CommentsDao commentsDao;
     @Autowired
     private UserMessageServiceImpl userMessageService;
 
