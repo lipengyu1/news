@@ -73,10 +73,10 @@ public class RedisServiceImpl implements RedisService {
         //设置特殊key
         String key = userId+"keywords";
         redisTemplate.opsForList().leftPush(key, keyWords);
-        Long size = redisTemplate.opsForList().size(userId);
+        Long size = redisTemplate.opsForList().size(key);
         //允许存储100个用户的输入，超过后自动pop
         if (size > 100) {
-            redisTemplate.opsForList().rightPop(userId);
+            redisTemplate.opsForList().rightPop(key);
         }
     }
 
