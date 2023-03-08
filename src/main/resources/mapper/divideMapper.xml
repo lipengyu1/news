@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lpy.news.dao.DivideDao">
     <insert id="saveDivide" parameterType="com.lpy.news.entity.Divide">
-        insert into divide (id,sort,name,create_time,update_time)
-        values (#{id},#{sort},#{name}, #{createTime}, #{updateTime});
+        insert into divide (id,name,create_time,update_time,link)
+        values (#{id},#{name}, #{createTime}, #{updateTime},#{link});
     </insert>
     <update id="removeDivide" parameterType="com.lpy.news.entity.Divide">
         update divide
@@ -11,7 +11,7 @@
         where id = #{id};
     </update>
     <select id="queryDividePage" resultType="com.lpy.news.entity.Divide">
-        select  id,sort,name,create_time,update_time from divide
+        select  id,sort,name,create_time,update_time,link from divide
         <where>
             status = 1
             <if test="name != null and name!= ''" >
@@ -32,15 +32,18 @@
     <update id="updateDivide" parameterType="com.lpy.news.entity.Divide">
         update divide
         set name = #{name},
-            sort = #{sort},
-            update_time = #{updateTime}
+            update_time = #{updateTime},
+            link = #{link}
         where id = #{id};
     </update>
     <select id="selectDivideById" resultType="com.lpy.news.entity.Divide">
-        select id,sort,name,create_time,update_time from divide where id = #{id} and status = 1;
+        select id,name,create_time,update_time,link from divide where id = #{id} and status = 1;
     </select>
     <select id="selectDivideByName" resultType="java.lang.Long">
         select id from divide
         where name = #{name} and status = 1;
+    </select>
+    <select id="getDivide" resultType="com.lpy.news.dto.DivideDto">
+        select id,name,link from divide where status = 1;
     </select>
 </mapper>

@@ -4,6 +4,7 @@ import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.common.CustomException;
 import com.lpy.news.dao.DivideDao;
 import com.lpy.news.dao.NewsDivideDao;
+import com.lpy.news.dto.DivideDto;
 import com.lpy.news.entity.Divide;
 import com.lpy.news.entity.News;
 import com.lpy.news.service.DivideService;
@@ -72,5 +73,10 @@ public class DivideServiceImpl implements DivideService {
     @Override
     public Divide selectDivideById(Long id) {
         return divideDao.selectDivideById(id);
+    }
+
+    @Override
+    public ArrayList<DivideDto> getDivide() {
+        return divideDao.getDivide();
     }
 }

@@ -1,6 +1,7 @@
 package com.lpy.news.controller;
 
 import com.lpy.news.common.BasePageResponse;
+import com.lpy.news.dto.DivideDto;
 import com.lpy.news.entity.Divide;
 import com.lpy.news.model.Response;
 import com.lpy.news.service.impl.DivideServiceImpl;
@@ -11,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Slf4j
 @RestController
@@ -92,5 +95,12 @@ public class DivideController {
             return Response.success(divide);
         }
         return Response.error("未查询到分类");
+    }
+
+    @GetMapping("/get")
+    @ApiOperation(value = "查询分类(前台)")
+    public Response<ArrayList<DivideDto>> getDivide(){
+        ArrayList<DivideDto> divideArrayList = divideService.getDivide();
+        return Response.success(divideArrayList);
     }
 }

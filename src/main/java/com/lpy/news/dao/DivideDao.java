@@ -1,7 +1,9 @@
 package com.lpy.news.dao;
 
+import com.lpy.news.dto.DivideDto;
 import com.lpy.news.entity.Divide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface DivideDao {
@@ -19,4 +21,6 @@ public interface DivideDao {
     Divide selectDivideById(Long id);
 
     Long selectDivideByName(String name);
+
+    ArrayList<DivideDto> getDivide();
 }

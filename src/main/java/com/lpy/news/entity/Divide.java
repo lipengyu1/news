@@ -30,4 +30,8 @@ public class Divide implements Serializable {
      * 状态
      */
     private Integer status;
+    /**
+     * 链接名
+     */
+    private String link;
 }

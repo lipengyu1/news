@@ -102,7 +102,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 "/common/download",
                 "/news/page",
                 "/news/hotNews",
-                "/divide/page",
+                "/divide/get",
                 "/notice/page"
         );
 
