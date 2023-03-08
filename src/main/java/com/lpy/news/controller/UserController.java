@@ -204,10 +204,24 @@ public class UserController {
      * @return
      */
     @PutMapping
-    @ApiOperation(value = "用户信息修改接口(前后台)")
+    @ApiOperation(value = "用户信息修改接口(后台)")
     public Response<String> update(@RequestBody User user) {
         log.info(user.toString());
         userService.updateUser(user);
         return Response.success("用户信息修改成功");
+    }
+
+    /**
+     * 修改用户信息2
+     * @param user
+     * @return
+     */
+    @PutMapping("/updateUserInfo")
+    @ApiOperation(value = "用户信息修改接口(前台)")
+    public Response<User> updateUserInfo(@RequestBody User user) {
+        log.info(user.toString());
+        userService.updateUser(user);
+        User user1 = userService.selectUserById(user.getId());
+        return Response.success(user1);
     }
 }
