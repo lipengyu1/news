@@ -8,6 +8,7 @@ import com.lpy.news.dao.NewsDivideDao;
 import com.lpy.news.dao.NewsLikeDao;
 import com.lpy.news.dto.NewsDto;
 import com.lpy.news.dto.NewsKeyQueryDto;
+import com.lpy.news.dto.NewsUserRecommendDto;
 import com.lpy.news.entity.NewsDivide;
 import com.lpy.news.entity.NewsLikeCountDB;
 import com.lpy.news.service.NewsService;
@@ -27,6 +28,8 @@ public class NewsServiceImpl implements NewsService {
     DivideDao divideDao;
     @Autowired
     NewsDivideDao newsDivideDao;
+    @Autowired
+    UserCFNewsRecommendServiceImpl userCFNewsRecommendService;
     @Autowired
     NewsDao newsDao;
     SnowService snowService = new SnowService(1, 1);
@@ -131,6 +134,17 @@ public class NewsServiceImpl implements NewsService {
             Integer num = newsLikeDao.selectNewsCountLike(newsKeyQueryDto.getId());
             newsKeyQueryDto.setLikeCount(num);
         }
+        return arrayList;
+    }
+
+    @Override
+    public ArrayList<NewsUserRecommendDto> queryLikeNews(Long userId) {
+        ArrayList<NewsUserRecommendDto> arrayList = userCFNewsRecommendService.RecommendTopic(userId);
+        return arrayList;
+    }
+    @Override
+    public ArrayList<NewsUserRecommendDto> randomLikeNews() {
+        ArrayList<NewsUserRecommendDto> arrayList = newsDao.queryNewsRandom();
         return arrayList;
     }
 }

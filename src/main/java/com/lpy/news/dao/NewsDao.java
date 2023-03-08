@@ -23,8 +23,11 @@ public interface NewsDao {
 
     ArrayList<NewsKeyQueryDto> queryNews(String keyWords);
 
+    ArrayList<NewsUserRecommendDto> queryNewsRandom();
+
     //以下为算法使用接口
     List<Long> getAllNewsIdList();
 
     NewsUserRecommendDto findByTopicIdIn(Long newsId);
+
 }

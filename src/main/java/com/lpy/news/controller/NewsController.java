@@ -181,4 +181,22 @@ public class NewsController {
         List list = redisService.getUserQuery(userId);
         return Response.success(list);
     }
+
+    /**
+     * 查询首页推荐文章
+     * @return
+     */
+    @GetMapping("/likeNews")
+    @ApiOperation(value = "查询首页推荐文章(前台)")
+    public Response<ArrayList<NewsUserRecommendDto>> queryNewsLike(HttpServletRequest request){
+        Long userId = null;
+        try {
+            userId = Long.valueOf(JwtUtils.getUserId(request.getHeader("token")));
+        } catch (Exception e) {
+            ArrayList<NewsUserRecommendDto> list = newsService.randomLikeNews();
+            return Response.success(list);
+        }
+        ArrayList<NewsUserRecommendDto> list = newsService.queryLikeNews(userId);
+        return Response.success(list);
+    }
 }

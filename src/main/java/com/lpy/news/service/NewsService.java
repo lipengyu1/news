@@ -3,6 +3,7 @@ package com.lpy.news.service;
 import com.lpy.news.common.BasePageResponse;
 import com.lpy.news.dto.NewsDto;
 import com.lpy.news.dto.NewsKeyQueryDto;
+import com.lpy.news.dto.NewsUserRecommendDto;
 
 import java.util.ArrayList;
 
@@ -21,4 +22,7 @@ public interface NewsService {
 
     ArrayList<NewsKeyQueryDto> queryNews(String keyWords);
 
+    ArrayList<NewsUserRecommendDto> queryLikeNews(Long userId);
+
+    ArrayList<NewsUserRecommendDto> randomLikeNews();
 }
