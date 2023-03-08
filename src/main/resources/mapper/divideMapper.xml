@@ -44,6 +44,6 @@
         where name = #{name} and status = 1;
     </select>
     <select id="getDivide" resultType="com.lpy.news.dto.DivideDto">
-        select id,name,link from divide where status = 1;
+        select id,name,link from divide where status = 1 order by sort;
     </select>
 </mapper>
