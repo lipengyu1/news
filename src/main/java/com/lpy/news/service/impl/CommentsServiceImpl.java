@@ -66,7 +66,7 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
 
-//    @CacheEvict(value = "usermessageCache",allEntries = true)
+    @CacheEvict(value = "usermessageCache",allEntries = true)
     @Override
     public void updateComments(CommentsDto commentsDto) {
         Integer state = commentsDto.getState();

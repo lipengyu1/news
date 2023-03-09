@@ -30,7 +30,7 @@ public class UserCollectionController {
      * 添加收藏
      * @return
      */
-//    @CacheEvict(value = "newsCollectionCache",allEntries = true)
+    @CacheEvict(value = "newsCollectionCache",allEntries = true)
     @PostMapping("/add")
     @ApiOperation(value = "用户添加收藏接口(前台)请求示例{\n" +
             "    \"newsId\":\"215577361272407041\"\n" +
@@ -48,7 +48,7 @@ public class UserCollectionController {
      * @param request
      * @return
      */
-//    @CacheEvict(value = "newsCollectionCache",allEntries = true)
+    @CacheEvict(value = "newsCollectionCache",allEntries = true)
     @PostMapping("/del")
     @ApiOperation(value = "用户删除收藏接口(前台)")
     public Response<String> del(@RequestParam Long[] ids, HttpServletRequest request){
@@ -63,7 +63,7 @@ public class UserCollectionController {
      * @param pageSize
      * @return
      */
-//    @Cacheable(value = "newsCollectionCache",key = "#request.getHeader('token')+'_'+'collection'")
+    @Cacheable(value = "newsCollectionCache",key = "#request.getHeader('token')+'_'+'collection'")
     @GetMapping("/page")
     @ApiOperation(value = "分页查询收藏接口(前台)")
     @ApiImplicitParams({
