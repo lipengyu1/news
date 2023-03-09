@@ -51,7 +51,8 @@
         select news.id,title,keywds,author,picture1,picture2,picture3,publish_house,publication_time,news_divide.divide_name
         from news inner join news_divide
         on news.id = news_divide.news_id
-        where keywds like '%${keyWords}%';
+        where keywds like '%${keyWords}%'
+        order by create_time desc;
     </select>
     <select id="getAllNewsIdList" resultType="java.lang.Long">
         select id from news;
