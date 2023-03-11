@@ -52,4 +52,8 @@ public class NewsDto implements Serializable {
      * 点赞量
      */
     private Integer likeCount;
+    /**
+     * 链接
+     */
+    private String link;
 }

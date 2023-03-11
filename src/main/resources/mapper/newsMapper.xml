@@ -3,9 +3,9 @@
 <mapper namespace="com.lpy.news.dao.NewsDao">
     <insert id="saveNews" parameterType="com.lpy.news.dto.NewsDto">
         insert into news
-            (id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time)
+            (id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time,link)
         values
-               (#{id},#{title},#{keywds}, #{author}, #{essay},#{picture1},#{picture2},#{picture3},#{publishHouse},#{publicationTime},#{createTime});
+               (#{id},#{title},#{keywds}, #{author}, #{essay},#{picture1},#{picture2},#{picture3},#{publishHouse},#{publicationTime},#{createTime},#{link});
     </insert>
     <update id="removeNews" parameterType="com.lpy.news.entity.News">
         update news
@@ -13,7 +13,7 @@
         where id = #{id};
     </update>
     <select id="queryNewsPage" resultType="com.lpy.news.dto.NewsDto">
-        select  news.id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time,news_divide.divide_name
+        select  news.id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time,news_divide.divide_name,link
         from news inner join news_divide
         on news.id = news_divide.news_id
         <where>
@@ -38,11 +38,12 @@
             author=#{author},
             essay = #{essay},
             publish_house = #{publishHouse},
-            publication_time = #{publicationTime}
+            publication_time = #{publicationTime},
+            link = #{link}
         where id = #{id};
     </update>
     <select id="selectNewsById" resultType="com.lpy.news.dto.NewsDto">
-        select  news.id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time,news_divide.divide_name
+        select  news.id,title,keywds,author,essay,picture1,picture2,picture3,publish_house,publication_time,create_time,news_divide.divide_name,link
         from news inner join news_divide
         on news.id = news_divide.news_id
         where news.id = #{id} and status = 1;
