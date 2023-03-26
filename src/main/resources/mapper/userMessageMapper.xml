@@ -4,7 +4,7 @@
     <select id="queryAllMessage" resultType="com.lpy.news.dto.UserMessageDto">
         select id,message,create_time
         from user_message
-        where user_id = #{userId} and status = 1;
+        where user_id = #{userId} and status = 1 order by create_time desc;
     </select>
     <update id="removeMessage"  parameterType="com.lpy.news.dto.UserMessageDto">
         update user_message

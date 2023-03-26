@@ -12,4 +12,6 @@ public interface UserCollectionDao {
     List<UserCollection> queryCollectionPage(int pageNo, int pageSize, Long userId);
 
     int queryCollectionPageCount(int pageNo, int pageSize, Long userId);
+
+    UserCollection queryUserCollection(Long userId, Long newsId);
 }

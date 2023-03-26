@@ -11,14 +11,17 @@
         where id = #{id} and user_id = #{userId};
     </update>
     <select id="queryCollectionPage" resultType="com.lpy.news.entity.UserCollection">
-        select id,news_id,user_id,create_time
+        select distinct news_id, id,news_id,user_id,create_time
         from user_collection
         where status = 1 and user_id = #{userId}
         order by create_time desc  limit ${pageNo}, ${pageSize};
     </select>
     <select id="queryCollectionPageCount" resultType="java.lang.Integer">
-        select count(*)
+        select count(distinct news_id)
         from user_collection
         where status = 1 and user_id = #{userId}
+    </select>
+    <select id="queryUserCollection" resultType="com.lpy.news.entity.UserCollection">
+        select * from user_collection where user_id = #{userId} and news_id = #{newsId} and status = 1;
     </select>
 </mapper>

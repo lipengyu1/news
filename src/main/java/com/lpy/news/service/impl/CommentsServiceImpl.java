@@ -29,7 +29,8 @@ public class CommentsServiceImpl implements CommentsService {
         commentsDto.setId(snowService.getId());
         commentsDto.setCommentsTime(LocalDateTime.now());
         commentsDao.saveComments(commentsDto);
-        userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论已发表，请等待审核，审核通过后方可显示");
+        String comment = commentsDto.getCommentsContent();
+        userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论“"+comment+"”已发表，请等待审核，审核通过后方可显示");
     }
 
     @Override
@@ -71,10 +72,11 @@ public class CommentsServiceImpl implements CommentsService {
     public void updateComments(CommentsDto commentsDto) {
         Integer state = commentsDto.getState();
         commentsDao.updateComments(commentsDto);
+        String comment = commentsDto.getCommentsContent();
         if (state == 1){
-            userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论审核已通过");
+            userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论“"+comment+"”审核已通过");
         }else {
-            userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论审核未通过");
+            userMessageService.addUserMessage(commentsDto.getUserId(),"您的评论“"+comment+"”审核未通过");
         }
     }
 

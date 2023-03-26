@@ -1,6 +1,7 @@
 package com.lpy.news.service.impl;
 
 import com.lpy.news.common.BasePageResponse;
+import com.lpy.news.common.CustomException;
 import com.lpy.news.dao.NewsDao;
 import com.lpy.news.dao.NewsLikeDao;
 import com.lpy.news.dao.UserCollectionDao;
@@ -27,6 +28,14 @@ public class UserCollectionServiceImpl implements UserCollectionService {
     SnowService snowService = new SnowService(1, 1);
     @Override
     public void addCollection(UserCollection userCollection) {
+
+        //userId+newsId判断
+        UserCollection userCollection1 = userCollectionDao.queryUserCollection(userCollection.getUserId(),userCollection.getNewsId());
+        //若存在，则提示已收藏
+        if(userCollection1 != null){
+            throw new CustomException("该文章已收藏");
+        }
+        //不存在，则添加
         userCollection.setCreateTime(LocalDateTime.now());
         userCollection.setId(snowService.getId());
         userCollectionDao.addCollection(userCollection);
