@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lpy.news.dao.PictureDao">
+    <insert id="savePicture" parameterType="com.lpy.news.entity.Picture">
+        insert into picture(id,img,divide_name,create_time,emp_id,emp_name)
+        values (#{id},#{img},#{divideName},#{createTime},#{empId},#{empName});
+    </insert>
+    <update id="removeNotice" parameterType="com.lpy.news.entity.Picture">
+        update picture
+        set status = 0
+        where id = #{id}
+    </update>
+    <update id="updateNews" parameterType="com.lpy.news.entity.Picture">
+        update picture
+        set img = #{img},
+            divide_name = #{divideName},
+            create_time = #{createTime},
+            emp_id = #{empId},
+            emp_name = #{empName}
+        where id = #{id}
+    </update>
+    <select id="queryPicturePage" resultType="com.lpy.news.entity.Picture">
+        select * from picture
+        <where>
+            status = 1
+            <if test="divideName != null and divideName!= ''" >
+                and divide_name = #{divideName}
+            </if>
+        </where>
+        order by  create_time desc limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="queryPictureCount" resultType="java.lang.Integer">
+        select count(*) from picture
+        <where>
+            status = 1
+            <if test="divideName != null and divideName!= ''" >
+                and divide_name = #{divideName}
+            </if>
+        </where>
+        order by  create_time desc limit ${pageNo}, ${pageSize};
+    </select>
+    <select id="showPicturePageByDiv" resultType="com.lpy.news.entity.Picture">
+        select * from picture
+        <where>
+            status = 1
+            <if test="divideName != null and divideName!= ''" >
+                and divide_name = #{divideName}
+            </if>
+        </where>
+        order by  create_time desc limit 0, 3;
+    </select>
+</mapper>

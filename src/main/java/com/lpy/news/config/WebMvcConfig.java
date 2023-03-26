@@ -104,7 +104,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 "/news/hotNews",
                 "/divide/get",
                 "/notice/page",
-                "/news/likeNews"
+                "/news/likeNews",
+                "/pictureshow/show"
         );
 
     }

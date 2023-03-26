@@ -19,7 +19,7 @@ public class NewsApplicationTests {
         info.put("username", "admin");
         info.put("pass", "123456");
         //生成token
-        String id = "188057040541844480";
+        String id = "185988114257413121";
         Long userId = Long.valueOf(id);
         String token = JwtUtils.sign(userId, info);
         System.out.println(token);
