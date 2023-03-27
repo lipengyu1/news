@@ -98,4 +98,20 @@ public class PictureComtroller {
         ArrayList<Picture> arrayList = pictureService.showPicturePage(divideName);
         return Response.success(arrayList);
     }
+
+    /**
+     * id查询轮播图（回显）
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "查询查询轮播图（接口(id)(后台)")
+    public Response<Picture> getById(@PathVariable Long id){
+        log.info("根据id查询轮播图（...");
+        Picture picture = pictureService.selectPictureById(id);
+        if (picture != null){
+            return Response.success(picture);
+        }
+        return Response.error("未查询到轮播图（");
+    }
 }

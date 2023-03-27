@@ -17,4 +17,6 @@ public interface PictureDao {
     int queryPictureCount(int pageNo, int pageSize, String divideName);
 
     ArrayList<Picture> showPicturePageByDiv(String divideName);
+
+    Picture selectPictureById(Long id);
 }

@@ -49,4 +49,7 @@
         </where>
         order by  create_time desc limit 0, 3;
     </select>
+    <select id="selectPictureById" resultType="com.lpy.news.entity.Picture">
+        select * from picture where id = #{id} and status = 1;
+    </select>
 </mapper>

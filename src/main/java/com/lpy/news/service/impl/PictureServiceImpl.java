@@ -78,4 +78,9 @@ public class PictureServiceImpl implements PictureService {
         ArrayList<Picture> queryList = pictureDao.showPicturePageByDiv(divideName);
         return queryList;
     }
+
+    @Override
+    public Picture selectPictureById(Long id) {
+        return pictureDao.selectPictureById(id);
+    }
 }

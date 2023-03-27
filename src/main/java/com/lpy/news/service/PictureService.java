@@ -15,4 +15,6 @@ public interface PictureService {
     BasePageResponse<Picture> queryPicturePage(int pageNo, int pageSize, String divideName);
 
     ArrayList<Picture> showPicturePage(String divideName);
+
+    Picture selectPictureById(Long id);
 }
