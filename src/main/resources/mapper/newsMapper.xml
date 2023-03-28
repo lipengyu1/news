@@ -39,7 +39,10 @@
             essay = #{essay},
             publish_house = #{publishHouse},
             publication_time = #{publicationTime},
-            link = #{link}
+            link = #{link},
+            picture1 = #{picture1},
+            picture2 = #{picture2},
+            picture3 = #{picture3}
         where id = #{id};
     </update>
     <select id="selectNewsById" resultType="com.lpy.news.dto.NewsDto">
