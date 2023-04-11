@@ -94,7 +94,7 @@ public class PictureComtroller {
     @Cacheable(value = "showNewsPicture",key = "#divideName+'_'+'NewsPicture'")
     @GetMapping("/show")
     @ApiOperation(value = "轮播图查询公告接口(前台)")
-    public Response<ArrayList<Picture>> page2(String divideName){
+    public Response<ArrayList<Picture>> page2(@RequestParam String divideName){
         ArrayList<Picture> arrayList = pictureService.showPicturePage(divideName);
         return Response.success(arrayList);
     }
