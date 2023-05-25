@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/pictureshow")
 @Api(tags = "轮播图相关接口")
-public class PictureComtroller {
+public class PictureController {
 
     @Autowired
     private PictureServiceImpl pictureService;

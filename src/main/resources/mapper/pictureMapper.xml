@@ -37,7 +37,6 @@
                 and divide_name = #{divideName}
             </if>
         </where>
-        order by  create_time desc limit ${pageNo}, ${pageSize};
     </select>
     <select id="showPicturePageByDiv" resultType="com.lpy.news.entity.Picture">
         select * from picture
