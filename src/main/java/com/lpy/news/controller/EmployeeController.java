@@ -130,7 +130,7 @@ public class EmployeeController {
      * @param map
      * @return
      */
-    @PostMapping("/find")
+    @PutMapping("/find")
     @ApiOperation(value = "员工找回密码接口")
     public Response<String> find(@RequestBody Map map) {
         log.info("找回密码", map);
